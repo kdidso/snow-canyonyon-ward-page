@@ -386,10 +386,8 @@
         </div>
 
         <div class="panel-right">
-          <a id="mapClickCover" href="#" target="_blank" rel="noopener" aria-label="Open directions (map link)"
-             style="position:absolute; inset:0; z-index: 10;"></a>
-          <div id="map" aria-label="Map"></div>
-        </div>
+  <div id="map" aria-label="Map"></div>
+</div>
       </section>
 
       <div class="disclaimer">
@@ -497,7 +495,12 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 }).addTo(map);
 
     const marker = L.marker([CONFIG.lat, CONFIG.lng]).addTo(map);
-    marker.bindPopup(`<strong>${CONFIG.unitName}</strong><br>${CONFIG.address.line1}<br>${CONFIG.address.city}, ${CONFIG.address.state} ${CONFIG.address.zip}`);
+    marker.bindPopup(`
+  <strong>${CONFIG.unitName}</strong><br>
+  ${CONFIG.address.line1}<br>
+  ${CONFIG.address.city}, ${CONFIG.address.state} ${CONFIG.address.zip}<br><br>
+  <a href="${mapsUrl}" target="_blank" rel="noopener">Open directions</a>
+`);
 
     // ----------------------------
     // Share button logic
