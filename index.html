@@ -492,6 +492,32 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 19,
   attribution: '&copy; OpenStreetMap contributors'
 }).addTo(map);
+// ----------------------------
+// Ward boundary overlay (GeoJSON)
+// ----------------------------
+const WARD_BOUNDARY_GEOJSON_URL = "https://kdidso.github.io/snow-canyon-map/ward_boundaries_JSO.geojson";
+
+fetch(WARD_BOUNDARY_GEOJSON_URL)
+  .then((r) => {
+    if (!r.ok) throw new Error(`Failed to load boundary GeoJSON (${r.status})`);
+    return r.json();
+  })
+  .then((geojson) => {
+    const boundaryLayer = L.geoJSON(geojson, {
+      interactive: false, // <-- makes it NOT selectable/clickable
+      style: () => ({
+        color: "#157493",  // outline color (matches your brand)
+        weight: 3,
+        opacity: 0.9,
+        fillColor: "#157493",
+        fillOpacity: 0.10
+      })
+    }).addTo(map);
+
+    // Optional: zoom the map to show the whole boundary nicely
+    // map.fitBounds(boundaryLayer.getBounds(), { padding: [18, 18] });
+  })
+  .catch((err) => console.error(err));
 
     const marker = L.marker([CONFIG.lat, CONFIG.lng]).addTo(map);
     marker.bindPopup(`
