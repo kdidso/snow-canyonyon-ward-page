@@ -479,11 +479,11 @@
     // Map (Leaflet + OSM)
     // ----------------------------
     const map = L.map("map", {
-  scrollWheelZoom: true,   // mouse wheel
-  touchZoom: true,         // pinch zoom on mobile
+  scrollWheelZoom: true,
+  touchZoom: true,
   dragging: true,
   tap: true
-}).setView([CONFIG.lat, CONFIG.lng], CONFIG.zoom);
+});
 
 // smoother zoom on trackpads
 map.options.wheelPxPerZoomLevel = 120;
@@ -504,18 +504,17 @@ fetch(WARD_BOUNDARY_GEOJSON_URL)
   })
   .then((geojson) => {
     const boundaryLayer = L.geoJSON(geojson, {
-      interactive: false, // <-- makes it NOT selectable/clickable
+      interactive: false,
       style: () => ({
-  color: "#157493",   // boundary outline color
-  weight: 3,
-  opacity: 0.95,
-  fill: false         // <-- THIS removes the interior fill
-})
-
+        color: "#157493",
+        weight: 3,
+        opacity: 0.95,
+        fill: false
+      })
     }).addTo(map);
 
-    // Optional: zoom the map to show the whole boundary nicely
-    // map.fitBounds(boundaryLayer.getBounds(), { padding: [18, 18] });
+    // Center/zoom the map to the ward boundary by default
+    map.fitBounds(boundaryLayer.getBounds(), { padding: [20, 20] });
   })
   .catch((err) => console.error(err));
 
