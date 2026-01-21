@@ -23,9 +23,10 @@ MANIFEST_PATH = os.getenv("MANIFEST_PATH", "unit-history/manifest.json").strip()
 HEADLESS = os.getenv("HEADLESS", "1").strip().lower() not in ("0", "false", "no", "")
 SKIP_EXISTING_FOLDERS = os.getenv("SKIP_EXISTING_FOLDERS", "1").strip().lower() not in ("0", "false", "no", "")
 
-# Auth env
+# Auth env (username/password only)
 LDS_USERNAME = os.getenv("LDS_USERNAME", "").strip()
 LDS_PASSWORD = os.getenv("LDS_PASSWORD", "").strip()
+
 
 # ---------------------------
 # Utilities
@@ -40,6 +41,7 @@ def safe_name(name: str, max_len: int = 90) -> str:
     if len(name) > max_len:
         name = name[:max_len].rstrip()
     return name
+
 
 def save_debug(page, tag="debug"):
     ts = time.strftime("%Y%m%d-%H%M%S")
@@ -56,11 +58,14 @@ def save_debug(page, tag="debug"):
         pass
     print(f"🧪 Saved debug screenshot: {shot}")
     print(f"🧪 Saved debug HTML:       {html}")
+    print(f"🧭 Current URL:            {getattr(page, 'url', '')}")
+
 
 def absolutize(href: str) -> str:
     if not href:
         return ""
     return urljoin(BASE, href)
+
 
 def pick_largest_from_srcset(srcset: str) -> str:
     """
@@ -84,6 +89,7 @@ def pick_largest_from_srcset(srcset: str) -> str:
     candidates.sort(key=lambda x: x[0])
     return candidates[-1][1]
 
+
 def normalize_img_url(u: str) -> str:
     if not u:
         return ""
@@ -94,12 +100,14 @@ def normalize_img_url(u: str) -> str:
         u = absolutize(u)
     return u
 
+
 def scroll_to_load(page, max_scrolls=18, pause_ms=350):
     for _ in range(max_scrolls):
         page.mouse.wheel(0, 1800)
         page.wait_for_timeout(pause_ms)
     page.evaluate("() => window.scrollTo(0, 0)")
     page.wait_for_timeout(250)
+
 
 def is_login_page(url: str) -> bool:
     u = (url or "").lower()
@@ -108,12 +116,14 @@ def is_login_page(url: str) -> bool:
         ("auth" in u and "churchofjesuschrist.org" in u)
     )
 
+
 def file_ext_from_url(url: str) -> str:
     path = urlparse(url).path
     ext = os.path.splitext(path)[1].lower()
     if ext in [".jpg", ".jpeg", ".png", ".gif", ".webp", ".bmp", ".tif", ".tiff", ".heic"]:
         return ext
     return ".jpg"
+
 
 def strip_downscaling_params(url: str) -> str:
     """
@@ -145,8 +155,10 @@ def strip_downscaling_params(url: str) -> str:
     except Exception:
         return url
 
+
 def ensure_dir(p: pathlib.Path):
     p.mkdir(parents=True, exist_ok=True)
+
 
 def zip_folder(root: pathlib.Path, zip_name: str):
     ensure_dir(pathlib.Path(zip_name).parent)
@@ -156,109 +168,106 @@ def zip_folder(root: pathlib.Path, zip_name: str):
                 z.write(p, p.relative_to(root))
     print(f"📦 Wrote zip: {zip_name}")
 
+
 # ---------------------------
-# Auth helpers
+# Auth helpers (UPDATED to use your exact input IDs)
 # ---------------------------
+def _click_first_that_exists(page, selectors, timeout_ms=10_000) -> bool:
+    for sel in selectors:
+        try:
+            loc = page.locator(sel).first
+            if loc.count() > 0:
+                loc.click(timeout=timeout_ms)
+                return True
+        except Exception:
+            continue
+    return False
+
 
 def attempt_headless_login(page):
     """
-    Best-effort headless login.
-    This may fail if MFA is required or the login flow changes.
+    Headless login using your confirmed elements:
+      - input#username-input
+      - button Next
+      - input#password-input
+      - button Sign In
     """
     if not LDS_USERNAME or not LDS_PASSWORD:
-        raise RuntimeError("No storage_state provided and LDS_USERNAME/LDS_PASSWORD not set.")
+        raise RuntimeError("LDS_USERNAME/LDS_PASSWORD are not set (GitHub Secrets).")
 
     print("🔐 Attempting headless login with LDS_USERNAME/LDS_PASSWORD...")
 
     page.goto(START_URL, wait_until="domcontentloaded", timeout=120_000)
-    page.wait_for_timeout(1500)
+    page.wait_for_timeout(1200)
 
     # If we aren't redirected to a login page, we might already be authenticated
     if not is_login_page(page.url):
         print("✅ Not on a login page; likely already authenticated.")
         return
 
-    # Generic form-fill attempts (works only if the page uses standard inputs)
-    # We intentionally try multiple common selectors.
-    filled = False
-    selectors_user = [
-        "input[type='email']",
-        "input[name='username']",
-        "input#username",
-        "input[id*='user']",
-        "input[autocomplete='username']",
-    ]
-    selectors_pass = [
-        "input[type='password']",
-        "input[name='password']",
-        "input#password",
-        "input[autocomplete='current-password']",
-    ]
-    for su in selectors_user:
-        try:
-            if page.locator(su).count() > 0:
-                page.locator(su).first.fill(LDS_USERNAME, timeout=8000)
-                filled = True
-                break
-        except Exception:
-            continue
+    # --- Step 1: username (your exact selector) ---
+    try:
+        page.wait_for_selector("#username-input", timeout=60_000)
+    except PWTimeoutError:
+        save_debug(page, tag="login_no_username_input")
+        raise RuntimeError("Could not find #username-input on login page.")
 
-    if not filled:
-        save_debug(page, tag="login_no_username_field")
-        raise RuntimeError("Could not find username/email input on login page.")
+    page.locator("#username-input").first.fill(LDS_USERNAME, timeout=10_000)
 
-    filled_p = False
-    for sp in selectors_pass:
-        try:
-            if page.locator(sp).count() > 0:
-                page.locator(sp).first.fill(LDS_PASSWORD, timeout=8000)
-                filled_p = True
-                break
-        except Exception:
-            continue
-
-    if not filled_p:
-        save_debug(page, tag="login_no_password_field")
-        raise RuntimeError("Could not find password input on login page.")
-
-    # Submit
-    submit_selectors = [
+    # Click Next (or submit)
+    next_clicked = _click_first_that_exists(page, [
+        "button:has-text('Next')",
         "button[type='submit']",
         "input[type='submit']",
-        "button:has-text('Sign in')",
+    ])
+
+    if not next_clicked:
+        # fallback: press Enter in username
+        try:
+            page.locator("#username-input").first.press("Enter", timeout=5_000)
+        except Exception:
+            save_debug(page, tag="login_cant_submit_username")
+            raise RuntimeError("Could not submit username (no Next button found and Enter failed).")
+
+    # --- Step 2: password (your exact selector) ---
+    try:
+        page.wait_for_selector("#password-input", timeout=60_000)
+    except PWTimeoutError:
+        # Sometimes there's an intermediate screen/challenge.
+        save_debug(page, tag="login_no_password_input_after_next")
+        raise RuntimeError("After clicking Next, could not find #password-input (possible interstitial/MFA/challenge).")
+
+    page.locator("#password-input").first.fill(LDS_PASSWORD, timeout=10_000)
+
+    # Click Sign In (or submit)
+    sign_in_clicked = _click_first_that_exists(page, [
         "button:has-text('Sign In')",
-        "button:has-text('Continue')",
-        "button:has-text('Next')",
-    ]
-    submitted = False
-    for ss in submit_selectors:
+        "button:has-text('Sign in')",
+        "button[type='submit']",
+        "input[type='submit']",
+    ])
+
+    if not sign_in_clicked:
+        # fallback: press Enter in password
         try:
-            if page.locator(ss).count() > 0:
-                page.locator(ss).first.click(timeout=8000)
-                submitted = True
-                break
+            page.locator("#password-input").first.press("Enter", timeout=5_000)
         except Exception:
-            continue
+            save_debug(page, tag="login_cant_submit_password")
+            raise RuntimeError("Could not submit password (no Sign In button found and Enter failed).")
 
-    if not submitted:
-        # Try pressing Enter in password field
-        try:
-            page.keyboard.press("Enter")
-            submitted = True
-        except Exception:
-            pass
+    # Give time for redirect
+    page.wait_for_timeout(2500)
 
-    page.wait_for_timeout(3000)
-
-    # If still on login page, it's likely MFA or a different flow.
+    # If still on login-ish URL, capture debug — likely MFA/verification challenge.
     if is_login_page(page.url):
         save_debug(page, tag="login_still_on_login_page")
         raise RuntimeError(
-            "Login still appears to be required (possibly MFA/2FA). "
-            "Use UNIT_HISTORY_STORAGE_STATE_B64 instead."
+            "Login still appears required after submitting password. "
+            "This is usually MFA/verification or a challenge screen triggered in GitHub Actions."
         )
 
     print("✅ Headless login appears successful.")
+
 
 # ---------------------------
 # Grid interactions
@@ -281,8 +290,10 @@ def open_story_grid(page):
 
     page.wait_for_timeout(800)
 
+
 def get_story_card_count(page) -> int:
     return page.locator(STORY_CARD_SELECTOR).count()
+
 
 def get_card_title(card_locator) -> str:
     for sel in ["h2", "h3", "[role='heading']"]:
@@ -317,6 +328,7 @@ def get_card_title(card_locator) -> str:
         pass
 
     return "Untitled"
+
 
 # ---------------------------
 # Story page: extract images + metadata
@@ -370,6 +382,7 @@ def extract_image_urls_from_dom(page) -> list[str]:
     cleaned.sort()
     return cleaned
 
+
 def guess_story_title_date(page) -> tuple[str, str]:
     title = "Untitled"
     date_str = ""
@@ -391,6 +404,7 @@ def guess_story_title_date(page) -> tuple[str, str]:
 
     return title, date_str
 
+
 def download_file_via_context(context, url: str, dest_path: pathlib.Path) -> bool:
     try:
         resp = context.request.get(url, timeout=120_000)
@@ -400,6 +414,7 @@ def download_file_via_context(context, url: str, dest_path: pathlib.Path) -> boo
         return True
     except Exception:
         return False
+
 
 def _try_close_lightbox(page):
     try:
@@ -426,6 +441,7 @@ def _try_close_lightbox(page):
                 break
         except Exception:
             pass
+
 
 def collect_fullsize_urls_via_lightbox(page) -> list[str]:
     thumb_selectors = [
@@ -534,6 +550,7 @@ def collect_fullsize_urls_via_lightbox(page) -> list[str]:
             out.append(u)
     return out
 
+
 def download_current_story(page, context, out_root: pathlib.Path) -> dict:
     try:
         page.wait_for_selector("h1", timeout=45_000)
@@ -616,6 +633,7 @@ def download_current_story(page, context, out_root: pathlib.Path) -> dict:
 
     return meta
 
+
 # ---------------------------
 # Main
 # ---------------------------
@@ -629,7 +647,7 @@ def main():
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=HEADLESS)
 
-     # Username/password only: login headless each run, then use saved state for the remainder of this run
+        # Username/password only: login headless each run, then use saved state for remainder of this run
         context = browser.new_context()
         page = context.new_page()
 
@@ -643,7 +661,6 @@ def main():
         context.close()
         context = browser.new_context(storage_state=storage_state_path)
         page = context.new_page()
-
 
         # Open grid
         open_story_grid(page)
@@ -693,7 +710,7 @@ def main():
 
             if is_login_page(page.url):
                 save_debug(page, tag=f"login_bounce_story_{i+1}")
-                raise RuntimeError("Bounced to login mid-run. Auth is not valid.")
+                raise RuntimeError("Bounced to login mid-run. Auth is not valid (or challenge/MFA triggered).")
 
             meta = download_current_story(page, context, out_root)
             meta["grid_title_guess"] = card_title
@@ -727,6 +744,7 @@ def main():
         browser.close()
 
     print("\n✅ Done.")
+
 
 if __name__ == "__main__":
     main()
