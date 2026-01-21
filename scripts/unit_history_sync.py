@@ -4,7 +4,6 @@ import re
 import json
 import time
 import zipfile
-import base64
 import pathlib
 from urllib.parse import urljoin, urlparse, parse_qs, urlencode, urlunparse
 
@@ -25,7 +24,6 @@ HEADLESS = os.getenv("HEADLESS", "1").strip().lower() not in ("0", "false", "no"
 SKIP_EXISTING_FOLDERS = os.getenv("SKIP_EXISTING_FOLDERS", "1").strip().lower() not in ("0", "false", "no", "")
 
 # Auth env
-STORAGE_STATE_B64 = os.getenv("UNIT_HISTORY_STORAGE_STATE_B64", "").strip()
 LDS_USERNAME = os.getenv("LDS_USERNAME", "").strip()
 LDS_PASSWORD = os.getenv("LDS_PASSWORD", "").strip()
 
@@ -161,11 +159,6 @@ def zip_folder(root: pathlib.Path, zip_name: str):
 # ---------------------------
 # Auth helpers
 # ---------------------------
-def write_storage_state_from_b64(path: str, b64: str):
-    data = base64.b64decode(b64.encode("utf-8"))
-    with open(path, "wb") as f:
-        f.write(data)
-    print(f"🔐 Wrote storage state to {path} from UNIT_HISTORY_STORAGE_STATE_B64")
 
 def attempt_headless_login(page):
     """
@@ -636,22 +629,21 @@ def main():
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=HEADLESS)
 
-        # Build context with either storage state or login
-        if STORAGE_STATE_B64:
-            write_storage_state_from_b64(storage_state_path, STORAGE_STATE_B64)
-            context = browser.new_context(storage_state=storage_state_path)
-            page = context.new_page()
-        else:
-            context = browser.new_context()
-            page = context.new_page()
-            attempt_headless_login(page)
-            # Save state for the rest of this run
-            context.storage_state(path=storage_state_path)
-            print("🔐 Saved storage_state.json for this workflow run.")
-            # Rebuild context using the stored state (cleaner + consistent)
-            context.close()
-            context = browser.new_context(storage_state=storage_state_path)
-            page = context.new_page()
+     # Username/password only: login headless each run, then use saved state for the remainder of this run
+        context = browser.new_context()
+        page = context.new_page()
+
+        attempt_headless_login(page)
+
+        # Save state for the rest of this run (avoids re-login mid-run)
+        context.storage_state(path=storage_state_path)
+        print("🔐 Saved storage_state.json for this workflow run.")
+
+        # Rebuild context using the stored state (cleaner + consistent)
+        context.close()
+        context = browser.new_context(storage_state=storage_state_path)
+        page = context.new_page()
+
 
         # Open grid
         open_story_grid(page)
