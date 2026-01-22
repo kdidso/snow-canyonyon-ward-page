@@ -723,6 +723,8 @@
       align-items: center;
       justify-content: center;
       user-select: none;
+      position: relative;
+      z-index: 5;
     }
 
     .nav-btn:hover {
@@ -1508,6 +1510,33 @@
       const { owner, repo } = CONFIG.unitHistory;
       return `https://github.com/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}`;
     }
+    function encodePathPreserveSlashes(p) {
+  // Encode each path segment safely (spaces, commas, etc.)
+  return String(p || "")
+    .split("/")
+    .map(seg => encodeURIComponent(seg))
+    .join("/");
+}
+
+function cdnUrlForPath(filePath) {
+  // jsDelivr is very reliable for public GitHub assets
+  const { owner, repo, branch } = CONFIG.unitHistory;
+  const p = encodePathPreserveSlashes(filePath);
+  return `https://cdn.jsdelivr.net/gh/${owner}/${repo}@${branch}/${p}`;
+}
+
+function rawUrlForPath(filePath) {
+  const { owner, repo, branch } = CONFIG.unitHistory;
+  const p = encodePathPreserveSlashes(filePath);
+  return `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${p}`;
+}
+
+function bestImageUrlForPath(filePath) {
+  // Prefer CDN; add a tiny cache-buster so a previous failed cache doesn't stick.
+  const v = Date.now();
+  return `${cdnUrlForPath(filePath)}?v=${v}`;
+}
+
 
     function setHistoryStatus(text) {
       const el = $("historyStatus");
@@ -1617,12 +1646,14 @@
         }
 
         const images = (Array.isArray(children) ? children : [])
-          .filter((ch) => ch && ch.type === "file" && isImageFile(ch.name))
-          .map((ch) => ({
-            name: ch.name,
-            download_url: ch.download_url || "",
-            html_url: ch.html_url || ""
-          }));
+  .filter(ch => ch && ch.type === "file" && isImageFile(ch.name))
+  .map(ch => ({
+    name: ch.name,
+    path: ch.path,                // IMPORTANT: store full repo path
+    url: bestImageUrlForPath(ch.path),
+    raw_fallback_url: rawUrlForPath(ch.path),
+    html_url: ch.html_url || ""
+  }));
 
         out.push({
           name: f.name,
@@ -1655,7 +1686,7 @@
         const { title, subtitle } = splitFolderName(f.name);
         const dateLine = prettyDateFromPrefix(f.name);
 
-        const thumb = f.images && f.images.length ? f.images[0].download_url : "";
+        const thumb = (f.images && f.images.length ? f.images[0].url : "");
         const count = f.images && f.images.length ? f.images.length : 0;
 
         const card = document.createElement("div");
@@ -1763,7 +1794,7 @@
         const t = document.createElement("div");
         t.className = "thumb";
         t.dataset.thumbIndex = String(i);
-        t.innerHTML = `<img src="${escapeHtml(img.download_url)}" alt="Thumbnail ${i + 1}" loading="lazy">`;
+        t.innerHTML = `<img src="${escapeHtml(img.url)}" alt="Thumbnail ${i + 1}" loading="lazy">`;
 
         t.addEventListener("click", () => {
           HISTORY.activeImageIndex = i;
@@ -1786,13 +1817,32 @@
       const imgObj = f.images[idx];
       const imgEl = $("modalMainImg");
 
-      imgEl.src = imgObj.download_url;
-      imgEl.alt = imgObj.name || `Photo ${idx + 1}`;
+      // Clear first to force a clean re-render in some browsers
+imgEl.removeAttribute("src");
+imgEl.alt = imgObj.name || `Photo ${idx + 1}`;
+
+// Try CDN first
+imgEl.src = imgObj.url;
+
+// If CDN fails, fall back to raw.githubusercontent.com (no cache-buster needed, but ok if present)
+imgEl.onerror = () => {
+  // Avoid infinite loops
+  imgEl.onerror = null;
+
+  // Try raw fallback
+  imgEl.src = imgObj.raw_fallback_url;
+
+  // If raw also fails, try one last time with an explicit cache buster
+  imgEl.onerror = () => {
+    imgEl.onerror = null;
+    imgEl.src = `${imgObj.raw_fallback_url}?v=${Date.now()}`;
+  };
+};
 
       $("modalCounter").textContent = `${idx + 1} / ${f.images.length}`;
 
       // Link opens the raw image (download_url) which is perfect for share/save
-      $("modalOpenRawLink").href = imgObj.download_url || (imgObj.html_url || f.html_url || historyRepoUrl);
+      $("modalOpenRawLink").href = imgObj.url || (imgObj.html_url || f.html_url || historyRepoUrl);
 
       // Highlight active thumb
       const thumbs = $("modalThumbStrip").querySelectorAll(".thumb");
