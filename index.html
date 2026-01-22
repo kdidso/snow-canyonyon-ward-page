@@ -1094,23 +1094,6 @@
         .join("/");
     }
 
-    function cdnUrlForPath(filePath) {
-      const { owner, repo, branch } = CONFIG.unitHistory;
-      const p = encodePathPreserveSlashes(filePath);
-      return `https://cdn.jsdelivr.net/gh/${owner}/${repo}@${branch}/${p}`;
-    }
-
-    function rawUrlForPath(filePath) {
-      const { owner, repo, branch } = CONFIG.unitHistory;
-      const p = encodePathPreserveSlashes(filePath);
-      return `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${p}`;
-    }
-
-    function bestImageUrlForPath(filePath) {
-      // Prefer CDN for display; cache-bust lightly to avoid "stuck" failures.
-      return `${cdnUrlForPath(filePath)}?v=${Date.now()}`;
-    }
-
     // ----------------------------
     // Populate UI
     // ----------------------------
@@ -1431,14 +1414,15 @@
         }
 
         const images = (Array.isArray(children) ? children : [])
-          .filter((ch) => ch && ch.type === "file" && isImageFile(ch.name))
-          .map((ch) => ({
-            name: ch.name,
-            path: ch.path,
-            display_url: bestImageUrlForPath(ch.path), // for <img src="">
-            raw_url: rawUrlForPath(ch.path),           // for "Open image"
-            html_url: ch.html_url || ""
-          }));
+  .filter((ch) => ch && ch.type === "file" && isImageFile(ch.name))
+  .map((ch) => ({
+    name: ch.name,
+    path: ch.path,
+    // THIS is the key: GitHub gives you a working URL already.
+    display_url: ch.download_url || "",
+    raw_url: ch.download_url || "",
+    html_url: ch.html_url || ""
+  }));
 
         out.push({
           name: f.name,
