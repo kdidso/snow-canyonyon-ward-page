@@ -58,12 +58,9 @@
       --radius-sm: 6px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
-    html,
-    body {
+    html, body {
       margin: 0;
       padding: 0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -71,15 +68,9 @@
       background: #fff;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    a { color: inherit; text-decoration: none; }
 
-    .container {
-      max-width: var(--maxw);
-      margin: 0 auto;
-    }
+    .container { max-width: var(--maxw); margin: 0 auto; }
 
     /* HERO */
     .hero {
@@ -90,17 +81,8 @@
       background: #111;
     }
 
-    @media (min-width: 640px) {
-      .hero {
-        height: 452px;
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .hero {
-        height: 519px;
-      }
-    }
+    @media (min-width: 640px) { .hero { height: 452px; } }
+    @media (min-width: 1024px) { .hero { height: 519px; } }
 
     .hero img {
       width: 100%;
@@ -114,11 +96,7 @@
     .hero .overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        to top,
-        rgba(0, 0, 0, 0.62),
-        rgba(0, 0, 0, 0) 72%
-      );
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0) 72%);
       pointer-events: none;
     }
 
@@ -133,10 +111,7 @@
     }
 
     @media (min-width: 640px) {
-      .hero-actions {
-        right: 24px;
-        bottom: 24px;
-      }
+      .hero-actions { right: 24px; bottom: 24px; }
     }
 
     .btn {
@@ -159,28 +134,12 @@
       outline-offset: 2px;
     }
 
-    .btn.icon-only {
-      width: 40px;
-      justify-content: center;
-      padding: 0;
-    }
+    .btn.icon-only { width: 40px; justify-content: center; padding: 0; }
 
-    .btn .label {
-      display: none;
-      font-size: 14px;
-    }
+    .btn .label { display: none; font-size: 14px; }
+    @media (min-width: 1024px) { .btn .label { display: inline; } }
 
-    @media (min-width: 1024px) {
-      .btn .label {
-        display: inline;
-      }
-    }
-
-    .btn svg {
-      width: 18px;
-      height: 18px;
-      fill: var(--brand);
-    }
+    .btn svg { width: 18px; height: 18px; fill: var(--brand); }
 
     /* Title block (bottom-left) */
     .hero-title {
@@ -193,13 +152,7 @@
       text-shadow: 0 6px 22px rgba(0, 0, 0, 0.55);
     }
 
-    @media (min-width: 640px) {
-      .hero-title {
-        left: 36px;
-        bottom: 24px;
-        width: 66%;
-      }
-    }
+    @media (min-width: 640px) { .hero-title { left: 36px; bottom: 24px; width: 66%; } }
 
     .hero-title h1 {
       margin: 0 0 6px 0;
@@ -208,40 +161,16 @@
       font-size: 28px;
     }
 
-    @media (min-width: 640px) {
-      .hero-title h1 {
-        font-size: 44px;
-      }
-    }
+    @media (min-width: 640px) { .hero-title h1 { font-size: 44px; } }
 
-    .hero-title .sub {
-      font-weight: 300;
-      opacity: 0.98;
-      font-size: 18px;
-    }
-
-    @media (min-width: 640px) {
-      .hero-title .sub {
-        font-size: 22px;
-      }
-    }
+    .hero-title .sub { font-weight: 300; opacity: 0.98; font-size: 18px; }
+    @media (min-width: 640px) { .hero-title .sub { font-size: 22px; } }
 
     /* Page content */
-    .page {
-      padding: 18px 14px 36px;
-    }
+    .page { padding: 18px 14px 36px; }
+    @media (min-width: 640px) { .page { padding: 28px 18px 50px; } }
 
-    @media (min-width: 640px) {
-      .page {
-        padding: 28px 18px 50px;
-      }
-    }
-
-    .section-title {
-      margin: 0 0 12px 0;
-      font-weight: 800;
-      font-size: 18px;
-    }
+    .section-title { margin: 0 0 12px 0; font-weight: 800; font-size: 18px; }
 
     .welcome {
       font-weight: 300;
@@ -262,27 +191,13 @@
     }
 
     @media (min-width: 640px) {
-      .panel {
-        grid-template-columns: 1.15fr 1fr;
-        min-height: 320px;
-      }
+      .panel { grid-template-columns: 1.15fr 1fr; min-height: 320px; }
     }
 
-    .panel-left {
-      padding: 18px 16px;
-    }
+    .panel-left { padding: 18px 16px; }
+    @media (min-width: 768px) { .panel-left { padding: 22px 22px; } }
 
-    @media (min-width: 768px) {
-      .panel-left {
-        padding: 22px 22px;
-      }
-    }
-
-    .meeting-line {
-      margin: 0 0 10px 0;
-      font-weight: 700;
-      font-size: 16px;
-    }
+    .meeting-line { margin: 0 0 10px 0; font-weight: 700; font-size: 16px; }
 
     .address {
       margin-top: 14px;
@@ -291,10 +206,7 @@
       color: var(--text);
     }
 
-    .address .muted {
-      color: var(--muted);
-      font-weight: 400;
-    }
+    .address .muted { color: var(--muted); font-weight: 400; }
 
     .directions {
       margin-top: 14px;
@@ -306,39 +218,14 @@
       font-weight: 600;
     }
 
-    .directions:hover {
-      text-decoration: underline;
-    }
+    .directions:hover { text-decoration: underline; }
+    .directions svg { width: 18px; height: 18px; fill: var(--brand); }
 
-    .directions svg {
-      width: 18px;
-      height: 18px;
-      fill: var(--brand);
-    }
+    .panel-right { position: relative; min-height: 180px; }
+    @media (min-width: 640px) { .panel-right { min-height: auto; } }
 
-    .panel-right {
-      position: relative;
-      min-height: 180px;
-    }
-
-    @media (min-width: 640px) {
-      .panel-right {
-        min-height: auto;
-      }
-    }
-
-    #map {
-      width: 100%;
-      height: 180px;
-      background: #e5e7eb;
-    }
-
-    @media (min-width: 640px) {
-      #map {
-        height: 100%;
-        min-height: 320px;
-      }
-    }
+    #map { width: 100%; height: 180px; background: #e5e7eb; }
+    @media (min-width: 640px) { #map { height: 100%; min-height: 320px; } }
 
     /* Dropdown */
     .dropdown {
@@ -355,12 +242,9 @@
       z-index: 50;
     }
 
-    .dropdown.open {
-      display: block;
-    }
+    .dropdown.open { display: block; }
 
-    .dropdown a,
-    .dropdown button {
+    .dropdown a, .dropdown button {
       width: 100%;
       display: flex;
       align-items: center;
@@ -374,10 +258,7 @@
       color: var(--text);
     }
 
-    .dropdown a:hover,
-    .dropdown button:hover {
-      background: rgba(21, 116, 147, 0.08);
-    }
+    .dropdown a:hover, .dropdown button:hover { background: rgba(21, 116, 147, 0.08); }
 
     .dropdown .small {
       font-size: 12px;
@@ -404,14 +285,10 @@
       z-index: 999;
     }
 
-    .toast.show {
-      opacity: 1;
-    }
+    .toast.show { opacity: 1; }
 
     /* Events widget */
-    .events-wrap {
-      margin-top: 22px;
-    }
+    .events-wrap { margin-top: 22px; }
 
     .events-card {
       background: var(--panel);
@@ -430,17 +307,9 @@
       border-bottom: 1px solid rgba(0, 0, 0, 0.06);
     }
 
-    .events-head h3 {
-      margin: 0;
-      font-size: 16px;
-      font-weight: 800;
-    }
+    .events-head h3 { margin: 0; font-size: 16px; font-weight: 800; }
 
-    .events-head .hint {
-      font-size: 12px;
-      color: var(--muted);
-      font-weight: 600;
-    }
+    .events-head .hint { font-size: 12px; color: var(--muted); font-weight: 600; }
 
     .events-body {
       background: #fff;
@@ -458,10 +327,6 @@
       pointer-events: auto;
     }
 
-    .events-overlay-link {
-      display: none;
-    }
-
     .events-footer {
       padding: 10px 16px;
       font-size: 12px;
@@ -473,9 +338,7 @@
     /* ----------------------------
        UNIT HISTORY (PHOTO FOLDERS) WIDGET
        ---------------------------- */
-    .history-wrap {
-      margin-top: 22px;
-    }
+    .history-wrap { margin-top: 22px; }
 
     .history-card {
       background: var(--panel);
@@ -495,11 +358,7 @@
       border-bottom: 1px solid rgba(0, 0, 0, 0.06);
     }
 
-    .history-head h3 {
-      margin: 0;
-      font-size: 16px;
-      font-weight: 800;
-    }
+    .history-head h3 { margin: 0; font-size: 16px; font-weight: 800; }
 
     .history-head .hint {
       font-size: 12px;
@@ -532,7 +391,7 @@
       align-items: start;
     }
 
-    /* Folder “card” styled like your screenshot tile */
+    /* Folder “card” */
     .folder-card {
       background: #fff;
       border: 1px solid rgba(0, 0, 0, 0.1);
@@ -573,14 +432,12 @@
       gap: 6px;
     }
 
-    /* small headline ABOVE the big bold title (as you asked) */
     .folder-subtitle {
       font-size: 12px;
       font-weight: 800;
       color: #b45309;
       letter-spacing: 0.2px;
       line-height: 1.15;
-      text-transform: none;
       margin: 0;
     }
 
@@ -591,26 +448,9 @@
       margin: 0;
     }
 
-    .folder-date {
-      font-size: 12px;
-      color: var(--muted);
-      font-weight: 700;
-      margin-top: 2px;
-    }
-
-    .folder-count {
-      margin-top: 6px;
-      font-size: 12px;
-      color: var(--muted);
-      font-weight: 600;
-    }
-
-    .history-status {
-      font-size: 13px;
-      color: var(--muted);
-      font-weight: 700;
-      padding: 10px 2px;
-    }
+    .folder-date { font-size: 12px; color: var(--muted); font-weight: 700; margin-top: 2px; }
+    .folder-count { margin-top: 6px; font-size: 12px; color: var(--muted); font-weight: 600; }
+    .history-status { font-size: 13px; color: var(--muted); font-weight: 700; padding: 10px 2px; }
 
     /* Modal (folder gallery) */
     .modal {
@@ -622,9 +462,7 @@
       padding: 18px;
     }
 
-    .modal.open {
-      display: flex;
-    }
+    .modal.open { display: flex; }
 
     .modal-panel {
       width: min(980px, 100%);
@@ -648,9 +486,7 @@
       background: rgba(243, 244, 246, 0.55);
     }
 
-    .modal-titles {
-      min-width: 0;
-    }
+    .modal-titles { min-width: 0; }
 
     .modal-subtitle {
       margin: 0 0 6px 0;
@@ -689,13 +525,9 @@
       outline-offset: 2px;
     }
 
-    .modal-close svg {
-      width: 20px;
-      height: 20px;
-      fill: var(--text);
-    }
+    .modal-close svg { width: 20px; height: 20px; fill: var(--text); }
 
-    .modal-body {
+    .modal-body{
       background: #111827;
       display: grid;
       grid-template-columns: 56px 1fr 56px;
@@ -703,12 +535,21 @@
       gap: 8px;
       padding: 10px;
       min-height: 220px;
+      position: relative;
     }
 
-    @media (max-width: 640px) {
-      .modal-body {
-        grid-template-columns: 44px 1fr 44px;
-      }
+    .modal-mainimg-wrap{
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: min(58vh, 520px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 12px;
+      background: #0b1220;
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .nav-btn {
@@ -724,41 +565,25 @@
       justify-content: center;
       user-select: none;
       position: relative;
-      z-index: 5;
+      z-index: 20;
     }
 
-    .nav-btn:hover {
-      background: rgba(255, 255, 255, 0.14);
-    }
+    .nav-btn:hover { background: rgba(255, 255, 255, 0.14); }
 
     .nav-btn:focus {
       outline: 3px solid rgba(21, 116, 147, 0.55);
       outline-offset: 2px;
     }
 
-    .nav-btn svg {
-      width: 18px;
-      height: 18px;
-      fill: #fff;
-    }
-
-    .modal-mainimg-wrap {
-      width: 100%;
-      height: min(58vh, 520px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      border-radius: 12px;
-      background: #0b1220;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
+    .nav-btn svg { width: 18px; height: 18px; fill: #fff; }
 
     .modal-mainimg {
       max-width: 100%;
       max-height: 100%;
       object-fit: contain;
+      object-position: center center;
       display: block;
+      margin: auto;
     }
 
     .modal-foot {
@@ -786,16 +611,8 @@
       cursor: pointer;
     }
 
-    .thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .thumb.active {
-      border-color: var(--brand);
-    }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .thumb.active { border-color: var(--brand); }
 
     .modal-caption {
       margin-top: 8px;
@@ -841,18 +658,8 @@
       padding: 16px 16px 10px;
     }
 
-    .cfm-title {
-      margin: 0 0 8px 0;
-      font-size: 18px;
-      font-weight: 800;
-    }
-
-    .cfm-sub {
-      margin: 0 0 6px 0;
-      font-size: 13px;
-      font-weight: 700;
-      color: #b45309;
-    }
+    .cfm-title { margin: 0 0 8px 0; font-size: 18px; font-weight: 800; }
+    .cfm-sub { margin: 0 0 6px 0; font-size: 13px; font-weight: 700; color: #b45309; }
 
     .cfm-big {
       margin: 0;
@@ -871,14 +678,9 @@
       border-radius: 8px;
     }
 
-    .cfm-link:hover {
-      text-decoration: underline;
-    }
+    .cfm-link:hover { text-decoration: underline; }
 
-    .cfm-imageWrap {
-      display: block;
-      padding: 0 16px 16px;
-    }
+    .cfm-imageWrap { display: block; padding: 0 16px 16px; }
 
     #cfmImg {
       width: 100%;
@@ -889,11 +691,7 @@
       display: block;
     }
 
-    @media (min-width: 640px) {
-      #cfmImg {
-        height: 300px;
-      }
-    }
+    @media (min-width: 640px) { #cfmImg { height: 300px; } }
   </style>
 </head>
 
@@ -1263,21 +1061,15 @@
     }
 
     function splitFolderName(folderName) {
-      // Split at the FIRST dash, but tolerate " - " and multiple dashes
-      // Example: "Fall scavenger hunt - FHE" => { title: "Fall scavenger hunt", subtitle: "FHE" }
       const raw = String(folderName || "").trim();
       const idx = raw.indexOf("-");
-      if (idx === -1) {
-        return { title: raw, subtitle: "" };
-      }
+      if (idx === -1) return { title: raw, subtitle: "" };
       const left = raw.slice(0, idx).trim();
       const right = raw.slice(idx + 1).trim();
       return { title: left || raw, subtitle: right || "" };
     }
 
     function prettyDateFromPrefix(s) {
-      // If folder starts with an ISO-ish date like "2025-11-10 ..." show "10 November 2025"
-      // Works for: YYYY-MM-DD, YYYY_MM_DD, YYYY.MM.DD
       const raw = String(s || "").trim();
       const m = raw.match(/^(\d{4})[-_.](\d{2})[-_.](\d{2})/);
       if (!m) return "";
@@ -1293,6 +1085,30 @@
         timeZone: "UTC"
       });
       return fmt.format(dt);
+    }
+
+    function encodePathPreserveSlashes(p) {
+      return String(p || "")
+        .split("/")
+        .map((seg) => encodeURIComponent(seg))
+        .join("/");
+    }
+
+    function cdnUrlForPath(filePath) {
+      const { owner, repo, branch } = CONFIG.unitHistory;
+      const p = encodePathPreserveSlashes(filePath);
+      return `https://cdn.jsdelivr.net/gh/${owner}/${repo}@${branch}/${p}`;
+    }
+
+    function rawUrlForPath(filePath) {
+      const { owner, repo, branch } = CONFIG.unitHistory;
+      const p = encodePathPreserveSlashes(filePath);
+      return `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${p}`;
+    }
+
+    function bestImageUrlForPath(filePath) {
+      // Prefer CDN for display; cache-bust lightly to avoid "stuck" failures.
+      return `${cdnUrlForPath(filePath)}?v=${Date.now()}`;
     }
 
     // ----------------------------
@@ -1324,7 +1140,7 @@
       shareText + "\n\n" + pageUrl
     )}`;
 
-    // Events embed (AGENDA view) + header link to full calendar
+    // Events embed + header link to full calendar
     const weekUrl = buildWeekEmbedFromFullEmbed(CONFIG.calendarFullEmbedUrl);
     $("eventsIframe").src = weekUrl;
     $("openCalendarHeaderLink").href = CONFIG.calendarFullEmbedUrl;
@@ -1496,7 +1312,7 @@
     // Uses GitHub Contents API (no directory listing needed)
     // ----------------------------
     const HISTORY = {
-      folderItems: [], // [{name, path, html_url, images:[{name, download_url, html_url}]}]
+      folderItems: [], // [{name, path, html_url, images:[{name, path, display_url, raw_url, html_url}]}]
       activeFolderIndex: -1,
       activeImageIndex: 0
     };
@@ -1510,33 +1326,6 @@
       const { owner, repo } = CONFIG.unitHistory;
       return `https://github.com/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}`;
     }
-    function encodePathPreserveSlashes(p) {
-  // Encode each path segment safely (spaces, commas, etc.)
-  return String(p || "")
-    .split("/")
-    .map(seg => encodeURIComponent(seg))
-    .join("/");
-}
-
-function cdnUrlForPath(filePath) {
-  // jsDelivr is very reliable for public GitHub assets
-  const { owner, repo, branch } = CONFIG.unitHistory;
-  const p = encodePathPreserveSlashes(filePath);
-  return `https://cdn.jsdelivr.net/gh/${owner}/${repo}@${branch}/${p}`;
-}
-
-function rawUrlForPath(filePath) {
-  const { owner, repo, branch } = CONFIG.unitHistory;
-  const p = encodePathPreserveSlashes(filePath);
-  return `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${p}`;
-}
-
-function bestImageUrlForPath(filePath) {
-  // Prefer CDN; add a tiny cache-buster so a previous failed cache doesn't stick.
-  const v = Date.now();
-  return `${cdnUrlForPath(filePath)}?v=${v}`;
-}
-
 
     function setHistoryStatus(text) {
       const el = $("historyStatus");
@@ -1551,7 +1340,6 @@ function bestImageUrlForPath(filePath) {
     }
 
     function sortFoldersSmart(folders) {
-      // Prefer date-ish prefix (newest first). If no date, fall back to name (descending).
       const toKey = (name) => {
         const m = String(name || "").trim().match(/^(\d{4})[-_.](\d{2})[-_.](\d{2})/);
         if (!m) return null;
@@ -1565,10 +1353,10 @@ function bestImageUrlForPath(filePath) {
       return folders.slice().sort((a, b) => {
         const ka = toKey(a.name);
         const kb = toKey(b.name);
-        if (ka !== null && kb !== null) return kb - ka; // newest first
+        if (ka !== null && kb !== null) return kb - ka;
         if (ka !== null && kb === null) return -1;
         if (ka === null && kb !== null) return 1;
-        return String(b.name).localeCompare(String(a.name)); // descending
+        return String(b.name).localeCompare(String(a.name));
       });
     }
 
@@ -1580,9 +1368,7 @@ function bestImageUrlForPath(filePath) {
 
       if (!res.ok) {
         const txt = await res.text().catch(() => "");
-        const msg = `GitHub request failed (${res.status}). ${
-          txt ? txt.slice(0, 120) : ""
-        }`.trim();
+        const msg = `GitHub request failed (${res.status}). ${txt ? txt.slice(0, 120) : ""}`.trim();
         throw new Error(msg);
       }
 
@@ -1595,9 +1381,8 @@ function bestImageUrlForPath(filePath) {
 
       const { path, branch } = CONFIG.unitHistory;
 
-      // List folder entries under unit-history/events
-      // NOTE: per_page is not supported on this endpoint; it returns all children for a directory (usually OK).
-      const listUrl = `${ghApiBase()}/contents/${encodeURIComponent(path)}?ref=${encodeURIComponent(branch)}`;
+      // IMPORTANT: preserve slashes when encoding a path in the URL.
+      const listUrl = `${ghApiBase()}/contents/${encodePathPreserveSlashes(path)}?ref=${encodeURIComponent(branch)}`;
 
       let items;
       try {
@@ -1621,21 +1406,21 @@ function bestImageUrlForPath(filePath) {
         return;
       }
 
-      // Load images for each folder (sequential to be nicer to GitHub API)
       const out = [];
 
       for (let i = 0; i < folders.length; i++) {
         const f = folders[i];
         setHistoryStatus(`Loading folders… (${i + 1}/${folders.length})`);
 
-        const folderApiUrl = `${ghApiBase()}/contents/${encodeURIComponent(f.path)}?ref=${encodeURIComponent(branch)}`;
+        const folderApiUrl = `${ghApiBase()}/contents/${encodePathPreserveSlashes(f.path)}?ref=${encodeURIComponent(
+          branch
+        )}`;
 
         let children = [];
         try {
           children = await ghFetchJson(folderApiUrl);
         } catch (err) {
           console.error(err);
-          // Keep folder, but mark as empty
           out.push({
             name: f.name,
             path: f.path,
@@ -1646,14 +1431,14 @@ function bestImageUrlForPath(filePath) {
         }
 
         const images = (Array.isArray(children) ? children : [])
-  .filter(ch => ch && ch.type === "file" && isImageFile(ch.name))
-  .map(ch => ({
-    name: ch.name,
-    path: ch.path,                // IMPORTANT: store full repo path
-    url: bestImageUrlForPath(ch.path),
-    raw_fallback_url: rawUrlForPath(ch.path),
-    html_url: ch.html_url || ""
-  }));
+          .filter((ch) => ch && ch.type === "file" && isImageFile(ch.name))
+          .map((ch) => ({
+            name: ch.name,
+            path: ch.path,
+            display_url: bestImageUrlForPath(ch.path), // for <img src="">
+            raw_url: rawUrlForPath(ch.path),           // for "Open image"
+            html_url: ch.html_url || ""
+          }));
 
         out.push({
           name: f.name,
@@ -1686,7 +1471,7 @@ function bestImageUrlForPath(filePath) {
         const { title, subtitle } = splitFolderName(f.name);
         const dateLine = prettyDateFromPrefix(f.name);
 
-        const thumb = (f.images && f.images.length ? f.images[0].url : "");
+        const thumb = f.images && f.images.length ? f.images[0].display_url : "";
         const count = f.images && f.images.length ? f.images.length : 0;
 
         const card = document.createElement("div");
@@ -1749,7 +1534,6 @@ function bestImageUrlForPath(filePath) {
       $("modalTitle").textContent = title || f.name;
       $("modalSubtitle").textContent = subtitle || "";
 
-      // If empty, show a friendly message in modal
       if (!f.images || f.images.length === 0) {
         $("modalMainImg").src = "";
         $("modalMainImg").alt = "No photos available";
@@ -1794,7 +1578,7 @@ function bestImageUrlForPath(filePath) {
         const t = document.createElement("div");
         t.className = "thumb";
         t.dataset.thumbIndex = String(i);
-        t.innerHTML = `<img src="${escapeHtml(img.url)}" alt="Thumbnail ${i + 1}" loading="lazy">`;
+        t.innerHTML = `<img src="${escapeHtml(img.display_url)}" alt="Thumbnail ${i + 1}" loading="lazy">`;
 
         t.addEventListener("click", () => {
           HISTORY.activeImageIndex = i;
@@ -1817,32 +1601,26 @@ function bestImageUrlForPath(filePath) {
       const imgObj = f.images[idx];
       const imgEl = $("modalMainImg");
 
-      // Clear first to force a clean re-render in some browsers
-imgEl.removeAttribute("src");
-imgEl.alt = imgObj.name || `Photo ${idx + 1}`;
+      // Reset image then set new src
+      imgEl.removeAttribute("src");
+      imgEl.alt = imgObj.name || `Photo ${idx + 1}`;
+      imgEl.style.objectFit = "contain";
+      imgEl.style.objectPosition = "center center";
 
-// Try CDN first
-imgEl.src = imgObj.url;
+      const baseDisplay = imgObj.display_url || imgObj.raw_url || "";
+      imgEl.src = baseDisplay;
 
-// If CDN fails, fall back to raw.githubusercontent.com (no cache-buster needed, but ok if present)
-imgEl.onerror = () => {
-  // Avoid infinite loops
-  imgEl.onerror = null;
-
-  // Try raw fallback
-  imgEl.src = imgObj.raw_fallback_url;
-
-  // If raw also fails, try one last time with an explicit cache buster
-  imgEl.onerror = () => {
-    imgEl.onerror = null;
-    imgEl.src = `${imgObj.raw_fallback_url}?v=${Date.now()}`;
-  };
-};
+      // If CDN display fails, fall back to raw once
+      imgEl.onerror = () => {
+        imgEl.onerror = null;
+        const fallback = imgObj.raw_url || baseDisplay;
+        imgEl.src = `${fallback}?v=${Date.now()}`;
+      };
 
       $("modalCounter").textContent = `${idx + 1} / ${f.images.length}`;
 
-      // Link opens the raw image (download_url) which is perfect for share/save
-      $("modalOpenRawLink").href = imgObj.url || (imgObj.html_url || f.html_url || historyRepoUrl);
+      // Open should point to raw (best for sharing/saving)
+      $("modalOpenRawLink").href = imgObj.raw_url || imgObj.html_url || f.html_url || historyRepoUrl;
 
       // Highlight active thumb
       const thumbs = $("modalThumbStrip").querySelectorAll(".thumb");
@@ -1851,7 +1629,7 @@ imgEl.onerror = () => {
         else t.classList.remove("active");
       });
 
-      // Ensure the active thumb stays visible
+      // Ensure active thumb is visible
       const activeThumb = $("modalThumbStrip").querySelector(`.thumb[data-thumb-index="${idx}"]`);
       if (activeThumb) {
         activeThumb.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "smooth" });
