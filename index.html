@@ -2,19 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=5"
+  />
   <title>Snow Canyon YSA Ward (26-35) - Unit Page</title>
-  <meta name="description" content="Snow Canyon YSA Ward (26-35) — local unit page with meeting times, address, map, and upcoming events." />
+  <meta
+    name="description"
+    content="Snow Canyon YSA Ward (26-35) — local unit page with meeting times, address, map, and upcoming events."
+  />
 
   <!-- Social preview -->
   <meta property="og:title" content="Snow Canyon YSA Ward (26-35) - Unit Page" />
-  <meta property="og:description" content="Meeting times, address, map, and upcoming ward events." />
+  <meta
+    property="og:description"
+    content="Meeting times, address, map, and upcoming ward events."
+  />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="" />
-  <meta property="og:image" content="https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=1400&q=80" />
+  <meta
+    property="og:image"
+    content="https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=1400&q=80"
+  />
 
   <!-- Favicon (simple) -->
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%E2%9B%AA%3C/text%3E%3C/svg%3E">
+  <link
+    rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%E2%9B%AA%3C/text%3E%3C/svg%3E"
+  />
 
   <!-- Leaflet (map) -->
   <link
@@ -30,133 +45,205 @@
   ></script>
 
   <style>
-    :root{
+    :root {
       --brand: #157493;
       --brand-dark: #0f5f76;
       --text: #1f2937;
       --muted: #6b7280;
       --panel: #f3f4f6;
       --white: #ffffff;
-      --shadow: 0 10px 25px rgba(0,0,0,0.12);
+      --shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
       --maxw: 952px;
       --radius: 10px;
       --radius-sm: 6px;
     }
 
-    *{ box-sizing: border-box; }
-    html, body { margin:0; padding:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--text); background: #fff; }
-    a { color: inherit; text-decoration: none; }
-    .container { max-width: var(--maxw); margin: 0 auto; }
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      background: #fff;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: var(--maxw);
+      margin: 0 auto;
+    }
 
     /* HERO */
-    .hero{
+    .hero {
       position: relative;
       width: 100%;
       height: 212px;
       overflow: hidden;
       background: #111;
     }
-    @media (min-width: 640px){
-      .hero{ height: 452px; }
+
+    @media (min-width: 640px) {
+      .hero {
+        height: 452px;
+      }
     }
-    @media (min-width: 1024px){
-      .hero{ height: 519px; }
+
+    @media (min-width: 1024px) {
+      .hero {
+        height: 519px;
+      }
     }
-    .hero img{
-      width:100%;
-      height:100%;
+
+    .hero img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       object-position: center;
-      display:block;
+      display: block;
       filter: saturate(1.05);
     }
-    .hero .overlay{
-      position:absolute;
-      inset:0;
-      background: linear-gradient(to top, rgba(0,0,0,0.62), rgba(0,0,0,0) 72%);
-      pointer-events:none;
+
+    .hero .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.62),
+        rgba(0, 0, 0, 0) 72%
+      );
+      pointer-events: none;
     }
 
     /* Hero actions (Share / More) */
-    .hero-actions{
-      position:absolute;
+    .hero-actions {
+      position: absolute;
       right: 14px;
       bottom: 14px;
-      display:flex;
-      gap:10px;
+      display: flex;
+      gap: 10px;
       z-index: 3;
     }
-    @media (min-width: 640px){
-      .hero-actions{ right: 24px; bottom: 24px; }
+
+    @media (min-width: 640px) {
+      .hero-actions {
+        right: 24px;
+        bottom: 24px;
+      }
     }
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      border: 1px solid rgba(0,0,0,0.08);
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
       background: var(--white);
       color: var(--brand);
       height: 40px;
       padding: 0 12px;
       border-radius: 4px;
-      box-shadow: 0 1px 0 rgba(0,0,0,0.05);
-      cursor:pointer;
-      user-select:none;
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+      cursor: pointer;
+      user-select: none;
     }
-    .btn:focus{ outline: 3px solid rgba(21,116,147,0.28); outline-offset: 2px; }
-    .btn.icon-only{ width: 40px; justify-content:center; padding:0; }
-    .btn .label{ display:none; font-size:14px; }
-    @media (min-width: 1024px){
-      .btn .label{ display:inline; }
+
+    .btn:focus {
+      outline: 3px solid rgba(21, 116, 147, 0.28);
+      outline-offset: 2px;
     }
-    .btn svg{ width:18px; height:18px; fill: var(--brand); }
+
+    .btn.icon-only {
+      width: 40px;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .btn .label {
+      display: none;
+      font-size: 14px;
+    }
+
+    @media (min-width: 1024px) {
+      .btn .label {
+        display: inline;
+      }
+    }
+
+    .btn svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--brand);
+    }
 
     /* Title block (bottom-left) */
-    .hero-title{
-      position:absolute;
+    .hero-title {
+      position: absolute;
       left: 14px;
       bottom: 14px;
       width: 75%;
       z-index: 3;
-      color:#fff;
-      text-shadow: 0 6px 22px rgba(0,0,0,0.55);
+      color: #fff;
+      text-shadow: 0 6px 22px rgba(0, 0, 0, 0.55);
     }
-    @media (min-width: 640px){
-      .hero-title{ left: 36px; bottom: 24px; width: 66%; }
+
+    @media (min-width: 640px) {
+      .hero-title {
+        left: 36px;
+        bottom: 24px;
+        width: 66%;
+      }
     }
-    .hero-title h1{
-      margin:0 0 6px 0;
+
+    .hero-title h1 {
+      margin: 0 0 6px 0;
       font-weight: 700;
       line-height: 1.06;
       font-size: 28px;
     }
-    @media (min-width: 640px){
-      .hero-title h1{ font-size: 44px; }
+
+    @media (min-width: 640px) {
+      .hero-title h1 {
+        font-size: 44px;
+      }
     }
-    .hero-title .sub{
+
+    .hero-title .sub {
       font-weight: 300;
       opacity: 0.98;
       font-size: 18px;
     }
-    @media (min-width: 640px){
-      .hero-title .sub{ font-size: 22px; }
+
+    @media (min-width: 640px) {
+      .hero-title .sub {
+        font-size: 22px;
+      }
     }
 
     /* Page content */
-    .page{
+    .page {
       padding: 18px 14px 36px;
     }
-    @media (min-width: 640px){
-      .page{ padding: 28px 18px 50px; }
+
+    @media (min-width: 640px) {
+      .page {
+        padding: 28px 18px 50px;
+      }
     }
 
-    .section-title{
+    .section-title {
       margin: 0 0 12px 0;
       font-weight: 800;
       font-size: 18px;
     }
 
-    .welcome{
+    .welcome {
       font-weight: 300;
       font-size: 16px;
       line-height: 1.55;
@@ -165,7 +252,7 @@
     }
 
     /* Info + Map panel */
-    .panel{
+    .panel {
       background: var(--panel);
       border-radius: var(--radius);
       overflow: hidden;
@@ -173,148 +260,189 @@
       grid-template-columns: 1fr;
       box-shadow: var(--shadow);
     }
-    @media (min-width: 640px){
-      .panel{
+
+    @media (min-width: 640px) {
+      .panel {
         grid-template-columns: 1.15fr 1fr;
         min-height: 320px;
       }
     }
 
-    .panel-left{
+    .panel-left {
       padding: 18px 16px;
     }
-    @media (min-width: 768px){
-      .panel-left{ padding: 22px 22px; }
+
+    @media (min-width: 768px) {
+      .panel-left {
+        padding: 22px 22px;
+      }
     }
 
-    .meeting-line{
+    .meeting-line {
       margin: 0 0 10px 0;
       font-weight: 700;
       font-size: 16px;
     }
 
-    .address{
+    .address {
       margin-top: 14px;
       font-size: 16px;
       line-height: 1.4;
       color: var(--text);
     }
-    .address .muted{ color: var(--muted); font-weight: 400; }
 
-    .directions{
+    .address .muted {
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .directions {
       margin-top: 14px;
       display: inline-flex;
-      align-items:center;
-      gap:10px;
+      align-items: center;
+      gap: 10px;
       color: var(--brand);
       font-size: 14px;
       font-weight: 600;
     }
-    .directions:hover{ text-decoration: underline; }
-    .directions svg{ width:18px; height:18px; fill: var(--brand); }
 
-    .panel-right{
+    .directions:hover {
+      text-decoration: underline;
+    }
+
+    .directions svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--brand);
+    }
+
+    .panel-right {
       position: relative;
       min-height: 180px;
     }
-    @media (min-width: 640px){
-      .panel-right{ min-height: auto; }
+
+    @media (min-width: 640px) {
+      .panel-right {
+        min-height: auto;
+      }
     }
-    #map{
-      width:100%;
+
+    #map {
+      width: 100%;
       height: 180px;
       background: #e5e7eb;
     }
-    @media (min-width: 640px){
-      #map{ height: 100%; min-height: 320px; }
+
+    @media (min-width: 640px) {
+      #map {
+        height: 100%;
+        min-height: 320px;
+      }
     }
 
     /* Dropdown */
-    .dropdown{
+    .dropdown {
       position: absolute;
       right: 0;
       bottom: 52px;
       background: #fff;
-      border: 1px solid rgba(0,0,0,0.10);
+      border: 1px solid rgba(0, 0, 0, 0.1);
       border-radius: 10px;
       box-shadow: var(--shadow);
       min-width: 240px;
       overflow: hidden;
-      display:none;
+      display: none;
       z-index: 50;
     }
-    .dropdown.open{ display:block; }
-    .dropdown a, .dropdown button{
-      width:100%;
-      display:flex;
-      align-items:center;
-      gap:10px;
+
+    .dropdown.open {
+      display: block;
+    }
+
+    .dropdown a,
+    .dropdown button {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 10px;
       padding: 12px 12px;
       font-size: 14px;
-      border:0;
+      border: 0;
       background: transparent;
-      cursor:pointer;
-      text-align:left;
+      cursor: pointer;
+      text-align: left;
       color: var(--text);
     }
-    .dropdown a:hover, .dropdown button:hover{
-      background: rgba(21,116,147,0.08);
+
+    .dropdown a:hover,
+    .dropdown button:hover {
+      background: rgba(21, 116, 147, 0.08);
     }
-    .dropdown .small{
+
+    .dropdown .small {
       font-size: 12px;
       color: var(--muted);
       padding: 10px 12px;
-      border-top: 1px solid rgba(0,0,0,0.06);
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
     }
 
     /* Toast */
-    .toast{
+    .toast {
       position: fixed;
       left: 50%;
       bottom: 18px;
       transform: translateX(-50%);
-      background: rgba(17,24,39,0.95);
-      color:#fff;
+      background: rgba(17, 24, 39, 0.95);
+      color: #fff;
       padding: 10px 12px;
       border-radius: 10px;
       font-size: 14px;
       box-shadow: var(--shadow);
       opacity: 0;
-      pointer-events:none;
+      pointer-events: none;
       transition: opacity 160ms ease;
       z-index: 999;
     }
-    .toast.show{ opacity: 1; }
+
+    .toast.show {
+      opacity: 1;
+    }
 
     /* Events widget */
-    .events-wrap{ margin-top: 22px; }
-    .events-card{
+    .events-wrap {
+      margin-top: 22px;
+    }
+
+    .events-card {
       background: var(--panel);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow: hidden;
       position: relative;
     }
-    .events-head{
-      display:flex;
-      align-items:center;
+
+    .events-head {
+      display: flex;
+      align-items: center;
       justify-content: space-between;
       padding: 14px 16px;
-      background: rgba(255,255,255,0.55);
-      border-bottom: 1px solid rgba(0,0,0,0.06);
+      background: rgba(255, 255, 255, 0.55);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
     }
-    .events-head h3{
-      margin:0;
+
+    .events-head h3 {
+      margin: 0;
       font-size: 16px;
       font-weight: 800;
     }
-    .events-head .hint{
+
+    .events-head .hint {
       font-size: 12px;
       color: var(--muted);
       font-weight: 600;
     }
 
-    .events-body{
+    .events-body {
       background: #fff;
       height: 300px;
       overflow: auto;
@@ -322,32 +450,34 @@
       position: relative;
     }
 
-    .events-iframe{
+    .events-iframe {
       width: 100%;
       height: 100%;
       border: 0;
-      display:block;
+      display: block;
       pointer-events: auto;
     }
 
-    .events-overlay-link{
+    .events-overlay-link {
       display: none;
     }
 
-    .events-footer{
+    .events-footer {
       padding: 10px 16px;
       font-size: 12px;
       color: var(--muted);
-      background: rgba(255,255,255,0.55);
-      border-top: 1px solid rgba(0,0,0,0.06);
+      background: rgba(255, 255, 255, 0.55);
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
     }
 
     /* ----------------------------
        UNIT HISTORY (PHOTO FOLDERS) WIDGET
        ---------------------------- */
-    .history-wrap{ margin-top: 22px; }
+    .history-wrap {
+      margin-top: 22px;
+    }
 
-    .history-card{
+    .history-card {
       background: var(--panel);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
@@ -355,35 +485,38 @@
       position: relative;
     }
 
-    .history-head{
-      display:flex;
-      align-items:center;
+    .history-head {
+      display: flex;
+      align-items: center;
       justify-content: space-between;
       gap: 12px;
       padding: 14px 16px;
-      background: rgba(255,255,255,0.55);
-      border-bottom: 1px solid rgba(0,0,0,0.06);
+      background: rgba(255, 255, 255, 0.55);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
     }
-    .history-head h3{
-      margin:0;
+
+    .history-head h3 {
+      margin: 0;
       font-size: 16px;
       font-weight: 800;
     }
-    .history-head .hint{
+
+    .history-head .hint {
       font-size: 12px;
       color: var(--muted);
       font-weight: 600;
       text-align: right;
       line-height: 1.2;
     }
-    .history-head .hint a{
+
+    .history-head .hint a {
       color: var(--brand);
       text-decoration: underline;
       white-space: nowrap;
     }
 
     /* Fixed-height scroll area */
-    .history-body{
+    .history-body {
       background: #fff;
       height: 360px;
       overflow: auto;
@@ -392,7 +525,7 @@
     }
 
     /* Responsive grid: fill across, wrap to rows */
-    .history-grid{
+    .history-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
       gap: 14px;
@@ -400,37 +533,40 @@
     }
 
     /* Folder “card” styled like your screenshot tile */
-    .folder-card{
+    .folder-card {
       background: #fff;
-      border: 1px solid rgba(0,0,0,0.10);
+      border: 1px solid rgba(0, 0, 0, 0.1);
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.10);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
       cursor: pointer;
       transition: transform 120ms ease, box-shadow 120ms ease;
       display: flex;
       flex-direction: column;
       min-height: 268px;
     }
-    .folder-card:hover{
+
+    .folder-card:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 26px rgba(0,0,0,0.14);
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.14);
     }
-    .folder-thumb{
+
+    .folder-thumb {
       width: 100%;
       height: 150px;
       background: #e5e7eb;
       position: relative;
       overflow: hidden;
     }
-    .folder-thumb img{
+
+    .folder-thumb img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
 
-    .folder-meta{
+    .folder-meta {
       padding: 12px 12px 14px;
       display: flex;
       flex-direction: column;
@@ -438,7 +574,7 @@
     }
 
     /* small headline ABOVE the big bold title (as you asked) */
-    .folder-subtitle{
+    .folder-subtitle {
       font-size: 12px;
       font-weight: 800;
       color: #b45309;
@@ -448,28 +584,28 @@
       margin: 0;
     }
 
-    .folder-title{
+    .folder-title {
       font-size: 18px;
       font-weight: 900;
       line-height: 1.1;
       margin: 0;
     }
 
-    .folder-date{
+    .folder-date {
       font-size: 12px;
       color: var(--muted);
       font-weight: 700;
       margin-top: 2px;
     }
 
-    .folder-count{
+    .folder-count {
       margin-top: 6px;
       font-size: 12px;
       color: var(--muted);
       font-weight: 600;
     }
 
-    .history-status{
+    .history-status {
       font-size: 13px;
       color: var(--muted);
       font-weight: 700;
@@ -477,17 +613,20 @@
     }
 
     /* Modal (folder gallery) */
-    .modal{
+    .modal {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.62);
+      background: rgba(0, 0, 0, 0.62);
       display: none;
       z-index: 2000;
       padding: 18px;
     }
-    .modal.open{ display: flex; }
 
-    .modal-panel{
+    .modal.open {
+      display: flex;
+    }
+
+    .modal-panel {
       width: min(980px, 100%);
       margin: auto;
       background: #fff;
@@ -499,27 +638,29 @@
       max-height: calc(100vh - 36px);
     }
 
-    .modal-head{
+    .modal-head {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
       gap: 12px;
       padding: 14px 14px 10px;
-      border-bottom: 1px solid rgba(0,0,0,0.08);
-      background: rgba(243,244,246,0.55);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      background: rgba(243, 244, 246, 0.55);
     }
 
-    .modal-titles{
+    .modal-titles {
       min-width: 0;
     }
-    .modal-subtitle{
+
+    .modal-subtitle {
       margin: 0 0 6px 0;
       font-size: 12px;
       font-weight: 900;
       color: #b45309;
       line-height: 1.2;
     }
-    .modal-title{
+
+    .modal-title {
       margin: 0;
       font-size: 18px;
       font-weight: 900;
@@ -528,62 +669,78 @@
       word-break: break-word;
     }
 
-    .modal-close{
+    .modal-close {
       border: 0;
       background: #fff;
       border-radius: 10px;
       width: 40px;
       height: 40px;
       cursor: pointer;
-      box-shadow: 0 1px 0 rgba(0,0,0,0.05);
-      border: 1px solid rgba(0,0,0,0.10);
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(0, 0, 0, 0.1);
       display: inline-flex;
       align-items: center;
       justify-content: center;
       flex: 0 0 auto;
     }
-    .modal-close:focus{ outline: 3px solid rgba(21,116,147,0.28); outline-offset: 2px; }
-    .modal-close svg{ width: 20px; height: 20px; fill: var(--text); }
 
-    .modal-body{
-  background: #111827;
-  display: grid;
-  grid-template-columns: 56px minmax(0, 1fr) 56px;
-  align-items: center;
-  gap: 8px;
-  padding: 10px;
-  min-height: 220px;
-}
+    .modal-close:focus {
+      outline: 3px solid rgba(21, 116, 147, 0.28);
+      outline-offset: 2px;
+    }
 
-@media (max-width: 640px){
-  .modal-body{
-    grid-template-columns: 44px minmax(0, 1fr) 44px;
-  }
-}
+    .modal-close svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--text);
+    }
 
-.modal-mainimg-wrap{ min-width: 0; }
-.nav-btn{ position: relative; z-index: 5; }
+    .modal-body {
+      background: #111827;
+      display: grid;
+      grid-template-columns: 56px 1fr 56px;
+      align-items: center;
+      gap: 8px;
+      padding: 10px;
+      min-height: 220px;
+    }
 
-    /* FORCE nav buttons above the image, always visible when applicable */
-    .nav-btn{
+    @media (max-width: 640px) {
+      .modal-body {
+        grid-template-columns: 44px 1fr 44px;
+      }
+    }
+
+    .nav-btn {
       width: 44px;
       height: 44px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.18);
-      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.08);
       color: #fff;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       user-select: none;
-      z-index: 5;
     }
-    .nav-btn:hover{ background: rgba(255,255,255,0.14); }
-    .nav-btn:focus{ outline: 3px solid rgba(21,116,147,0.55); outline-offset: 2px; }
-    .nav-btn svg{ width: 18px; height: 18px; fill: #fff; }
 
-    .modal-mainimg-wrap{
+    .nav-btn:hover {
+      background: rgba(255, 255, 255, 0.14);
+    }
+
+    .nav-btn:focus {
+      outline: 3px solid rgba(21, 116, 147, 0.55);
+      outline-offset: 2px;
+    }
+
+    .nav-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: #fff;
+    }
+
+    .modal-mainimg-wrap {
       width: 100%;
       height: min(58vh, 520px);
       display: flex;
@@ -592,52 +749,31 @@
       overflow: hidden;
       border-radius: 12px;
       background: #0b1220;
-      border: 1px solid rgba(255,255,255,0.08);
-      position: relative;
-      z-index: 1;
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    /* Smooth fade-in so “not centered / flashing” isn’t a thing */
-    .modal-mainimg{
+    .modal-mainimg {
       max-width: 100%;
       max-height: 100%;
       object-fit: contain;
       display: block;
-      width: auto;
-      height: auto;
-      opacity: 0;
-      transition: opacity 140ms ease;
     }
-    .modal-mainimg.is-loaded{ opacity: 1; }
 
-    .modal-loading{
-      position: absolute;
-      inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      color: rgba(255,255,255,0.85);
-      font-weight: 800;
-      font-size: 13px;
-      letter-spacing: 0.2px;
-      user-select: none;
-    }
-    .modal-loading.show{ display:flex; }
-
-    .modal-foot{
+    .modal-foot {
       padding: 10px 12px 12px;
       background: #fff;
-      border-top: 1px solid rgba(0,0,0,0.08);
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
     }
 
-    .thumb-strip{
+    .thumb-strip {
       display: flex;
       gap: 8px;
       overflow-x: auto;
       padding-bottom: 4px;
       -webkit-overflow-scrolling: touch;
     }
-    .thumb{
+
+    .thumb {
       width: 66px;
       height: 52px;
       border-radius: 10px;
@@ -647,16 +783,19 @@
       flex: 0 0 auto;
       cursor: pointer;
     }
-    .thumb img{
+
+    .thumb img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
-    .thumb.active{
+
+    .thumb.active {
       border-color: var(--brand);
     }
-    .modal-caption{
+
+    .modal-caption {
       margin-top: 8px;
       font-size: 12px;
       font-weight: 700;
@@ -666,7 +805,8 @@
       gap: 10px;
       flex-wrap: wrap;
     }
-    .modal-caption a{
+
+    .modal-caption a {
       color: var(--brand);
       text-decoration: underline;
       font-weight: 800;
@@ -674,7 +814,7 @@
     }
 
     /* Footer-ish disclaimer */
-    .disclaimer{
+    .disclaimer {
       margin-top: 18px;
       font-size: 12px;
       color: var(--muted);
@@ -682,16 +822,16 @@
     }
 
     /* Come Follow Me widget */
-    .cfm-card{
+    .cfm-card {
       margin-top: 22px;
       background: #fff;
-      border: 1px solid rgba(0,0,0,0.08);
+      border: 1px solid rgba(0, 0, 0, 0.08);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow: hidden;
     }
 
-    .cfm-head{
+    .cfm-head {
       display: flex;
       gap: 14px;
       justify-content: space-between;
@@ -699,20 +839,20 @@
       padding: 16px 16px 10px;
     }
 
-    .cfm-title{
+    .cfm-title {
       margin: 0 0 8px 0;
       font-size: 18px;
       font-weight: 800;
     }
 
-    .cfm-sub{
+    .cfm-sub {
       margin: 0 0 6px 0;
       font-size: 13px;
       font-weight: 700;
       color: #b45309;
     }
 
-    .cfm-big{
+    .cfm-big {
       margin: 0;
       font-size: 18px;
       font-weight: 800;
@@ -720,7 +860,7 @@
       line-height: 1.2;
     }
 
-    .cfm-link{
+    .cfm-link {
       white-space: nowrap;
       font-size: 14px;
       font-weight: 700;
@@ -728,14 +868,17 @@
       padding: 8px 10px;
       border-radius: 8px;
     }
-    .cfm-link:hover{ text-decoration: underline; }
 
-    .cfm-imageWrap{
+    .cfm-link:hover {
+      text-decoration: underline;
+    }
+
+    .cfm-imageWrap {
       display: block;
       padding: 0 16px 16px;
     }
 
-    #cfmImg{
+    #cfmImg {
       width: 100%;
       height: 220px;
       object-fit: cover;
@@ -744,8 +887,10 @@
       display: block;
     }
 
-    @media (min-width: 640px){
-      #cfmImg{ height: 300px; }
+    @media (min-width: 640px) {
+      #cfmImg {
+        height: 300px;
+      }
     }
   </style>
 </head>
@@ -763,15 +908,17 @@
     <!-- Title bottom-left -->
     <div class="hero-title">
       <h1 id="unitName">Snow Canyon YSA Ward (26-35)</h1>
-      <div class="sub" id="unitCity">Events & Meeting Times</div>
+      <div class="sub" id="unitCity">Events &amp; Meeting Times</div>
     </div>
 
     <!-- Buttons bottom-right -->
     <div class="hero-actions">
-      <div style="position:relative;">
+      <div style="position: relative;">
         <button class="btn" id="shareBtn" type="button" aria-label="Share this page">
           <svg viewBox="0 0 17 20" aria-hidden="true">
-            <path d="M4.18231 11.85C3.82397 12.1759 3.37868 12.3907 2.90056 12.4683C2.42244 12.5458 1.93208 12.4828 1.4891 12.2869C1.04611 12.091 0.669579 11.7706 0.405266 11.3647C0.140953 10.9588 0.000244141 10.4849 0.000244141 10.0005C0.000244141 9.51616 0.140953 9.04222 0.405266 8.63632C0.669579 8.23042 1.04611 7.91005 1.4891 7.71414C1.93208 7.51823 2.42244 7.45523 2.90056 7.53279C3.37868 7.61035 3.82397 7.82513 4.18231 8.15103L12.0623 3.55403C11.9297 2.97162 12.0101 2.36098 12.2888 1.83267C12.5675 1.30436 13.0261 0.893298 13.5817 0.673899C14.1372 0.454499 14.753 0.441265 15.3175 0.636592C15.8819 0.831918 16.3578 1.2229 16.659 1.73874C16.9601 2.25459 17.0666 2.86121 16.9592 3.44878C16.8518 4.03636 16.5375 4.56605 16.0733 4.94197C15.6091 5.31788 15.0257 5.51517 14.4286 5.49813C13.8315 5.48108 13.2603 5.25082 12.8183 4.84903L4.93831 9.44603C5.02092 9.81075 5.02092 10.1893 4.93831 10.554L12.8183 15.151C13.2603 14.7492 13.8315 14.519 14.4286 14.5019C15.0257 14.4849 15.6091 14.6822 16.0733 15.0581C16.5375 15.434 16.8518 15.9637 16.9592 16.5513C17.0666 17.1389 16.9601 17.7455 16.659 18.2613C16.3578 18.7772 15.8819 19.1681 15.3175 19.3635C14.753 19.5588 14.1372 19.5456 13.5817 19.3262C13.0261 19.1068 12.5675 18.6957 12.2888 18.1674C12.0101 17.6391 11.9297 17.0284 12.0623 16.446L4.18231 11.849V11.85Z"></path>
+            <path
+              d="M4.18231 11.85C3.82397 12.1759 3.37868 12.3907 2.90056 12.4683C2.42244 12.5458 1.93208 12.4828 1.4891 12.2869C1.04611 12.091 0.669579 11.7706 0.405266 11.3647C0.140953 10.9588 0.000244141 10.4849 0.000244141 10.0005C0.000244141 9.51616 0.140953 9.04222 0.405266 8.63632C0.669579 8.23042 1.04611 7.91005 1.4891 7.71414C1.93208 7.51823 2.42244 7.45523 2.90056 7.53279C3.37868 7.61035 3.82397 7.82513 4.18231 8.15103L12.0623 3.55403C11.9297 2.97162 12.0101 2.36098 12.2888 1.83267C12.5675 1.30436 13.0261 0.893298 13.5817 0.673899C14.1372 0.454499 14.753 0.441265 15.3175 0.636592C15.8819 0.831918 16.3578 1.2229 16.659 1.73874C16.9601 2.25459 17.0666 2.86121 16.9592 3.44878C16.8518 4.03636 16.5375 4.56605 16.0733 4.94197C15.6091 5.31788 15.0257 5.51517 14.4286 5.49813C13.8315 5.48108 13.2603 5.25082 12.8183 4.84903L4.93831 9.44603C5.02092 9.81075 5.02092 10.1893 4.93831 10.554L12.8183 15.151C13.2603 14.7492 13.8315 14.519 14.4286 14.5019C15.0257 14.4849 15.6091 14.6822 16.0733 15.0581C16.5375 15.434 16.8518 15.9637 16.9592 16.5513C17.0666 17.1389 16.9601 17.7455 16.659 18.2613C16.3578 18.7772 15.8819 19.1681 15.3175 19.3635C14.753 19.5588 14.1372 19.5456 13.5817 19.3262C13.0261 19.1068 12.5675 18.6957 12.2888 18.1674C12.0101 17.6391 11.9297 17.0284 12.0623 16.446L4.18231 11.849V11.85Z"
+            ></path>
           </svg>
           <span class="label">Share</span>
         </button>
@@ -780,14 +927,18 @@
           <button type="button" id="copyLinkBtn" role="menuitem">Copy link</button>
           <a id="smsLink" href="#" role="menuitem">Text</a>
           <a id="emailLink" href="#" role="menuitem">Email</a>
-          <div class="small">Tip: On mobile, “Share” may open your device share sheet.</div>
+          <div class="small">
+            Tip: On mobile, “Share” may open your device share sheet.
+          </div>
         </div>
       </div>
 
-      <div style="position:relative;">
+      <div style="position: relative;">
         <button class="btn icon-only" id="moreBtn" type="button" aria-label="More options">
           <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M10 18C10 19.1 10.9 20 12 20C13.1 20 14 19.1 14 18C14 16.9 13.1 16 12 16C10.9 16 10 16.9 10 18ZM10 6C10 7.1 10.9 8 12 8C13.1 8 14 7.1 14 6C14 4.9 13.1 4 12 4C10.9 4 10 4.9 10 6ZM10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10C10.9 10 10 10.9 10 12Z"></path>
+            <path
+              d="M10 18C10 19.1 10.9 20 12 20C13.1 20 14 19.1 14 18C14 16.9 13.1 16 12 16C10.9 16 10 16.9 10 18ZM10 6C10 7.1 10.9 8 12 8C13.1 8 14 7.1 14 6C14 4.9 13.1 4 12 4C10.9 4 10 4.9 10 6ZM10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10C10.9 10 10 10.9 10 12Z"
+            ></path>
           </svg>
         </button>
 
@@ -823,13 +974,23 @@
   <!-- CONTENT -->
   <main class="page">
     <div class="container">
-
       <!-- UPCOMING EVENTS WIDGET -->
       <div class="events-wrap" aria-label="Upcoming events">
         <div class="events-card">
           <div class="events-head">
             <h3>Upcoming events</h3>
-            <div class="hint">Scroll to see more • <a id="openCalendarHeaderLink" href="#" target="_blank" rel="noopener" style="color:var(--brand); text-decoration:underline;">Open full calendar</a></div>
+            <div class="hint">
+              Scroll to see more •
+              <a
+                id="openCalendarHeaderLink"
+                href="#"
+                target="_blank"
+                rel="noopener"
+                style="color: var(--brand); text-decoration: underline;"
+              >
+                Open full calendar
+              </a>
+            </div>
           </div>
 
           <div class="events-body">
@@ -867,27 +1028,46 @@
         </div>
       </div>
 
-      <span style="display: flex; height:20px;"></span>
+      <span style="display: flex; height: 20px;"></span>
 
       <h2 class="section-title" id="welcome">Welcome</h2>
       <p class="welcome" id="welcomeText">
-        The Church of Jesus Christ of Latter-day Saints welcomes neighbors, families, and friends to join us for a variety of faith-based activities.
-        This website is regularly updated with Sunday worship services and activities. Come join us! We welcome you to RSVP.
+        The Church of Jesus Christ of Latter-day Saints welcomes neighbors, families, and friends to join us for a
+        variety of faith-based activities. This website is regularly updated with Sunday worship services and
+        activities. Come join us! We welcome you to RSVP.
       </p>
 
       <section class="panel" id="meeting" aria-label="Meeting info and map">
         <div class="panel-left">
-          <div class="meeting-line"><span id="serviceTitle1">Sunday Service</span> <span id="serviceTime1">10:30 AM</span></div>
-          <div class="meeting-line"><span id="serviceTitle2">Gospel Study</span> <span id="serviceTime2">11:30 AM</span></div>
+          <div class="meeting-line">
+            <span id="serviceTitle1">Sunday Service</span>
+            <span id="serviceTime1">10:30 AM</span>
+          </div>
+          <div class="meeting-line">
+            <span id="serviceTitle2">Gospel Study</span>
+            <span id="serviceTime2">11:30 AM</span>
+          </div>
 
           <div class="address" aria-label="Address">
             <div id="addrLine1">943 East 400 South</div>
-            <div><span id="addrCity">St. George</span><span class="muted">, </span><span id="addrState">UT</span> <span id="addrZip">84770</span></div>
+            <div>
+              <span id="addrCity">St. George</span><span class="muted">, </span><span id="addrState">UT</span>
+              <span id="addrZip">84770</span>
+            </div>
           </div>
 
-          <a class="directions" id="directionsLink" href="#" target="_blank" rel="noopener" aria-label="Directions in Google Maps">
+          <a
+            class="directions"
+            id="directionsLink"
+            href="#"
+            target="_blank"
+            rel="noopener"
+            aria-label="Directions in Google Maps"
+          >
             <svg viewBox="0 0 20 20" aria-hidden="true">
-              <path d="M15.4059 9.4343L12.9439 11.8963C12.8743 11.9669 12.7915 12.0231 12.7002 12.0617C12.6088 12.1002 12.5108 12.1204 12.4116 12.1209C12.3125 12.1215 12.2142 12.1024 12.1225 12.0649C12.0307 12.0274 11.9472 11.9721 11.8769 11.9023C11.8064 11.8323 11.7506 11.7489 11.7127 11.6571C11.6748 11.5652 11.6556 11.4667 11.6562 11.3673C11.6569 11.268 11.6774 11.1697 11.7165 11.0784C11.7555 10.987 11.8125 10.9044 11.8839 10.8353L13.0719 9.6473H8.64189C7.70789 9.6473 6.95689 10.4213 6.95689 11.3973V12.8973C6.95689 13.0962 6.87788 13.287 6.73722 13.4276C6.59657 13.5683 6.40581 13.6473 6.20689 13.6473C6.00798 13.6473 5.81722 13.5683 5.67656 13.4276C5.53591 13.287 5.45689 13.0962 5.45689 12.8973V11.3973C5.45689 9.6023 6.86889 8.1473 8.64289 8.1473H13.0719L11.8719 6.9483C11.7353 6.80679 11.6598 6.6173 11.6616 6.42065C11.6634 6.22401 11.7424 6.03593 11.8815 5.89694C12.0206 5.75795 12.2088 5.67916 12.4054 5.67755C12.6021 5.67593 12.7915 5.75162 12.9329 5.8883L15.3459 8.3003C15.3568 8.31139 15.3675 8.32272 15.3779 8.3343L15.4129 8.3673C15.4833 8.43739 15.539 8.52079 15.5768 8.61264C15.6146 8.70449 15.6338 8.80295 15.6331 8.90227C15.6325 9.0016 15.612 9.0998 15.573 9.19114C15.534 9.28249 15.4772 9.36515 15.4059 9.4343ZM19.5219 9.1973L10.6169 0.293304C10.4283 0.105466 10.173 0 9.90689 0C9.64075 0 9.38544 0.105466 9.19689 0.293304L0.292893 9.1973C0.105299 9.38598 0 9.64124 0 9.9073C0 10.1734 0.105299 10.4286 0.292893 10.6173L9.19789 19.5213C9.58689 19.9113 10.2249 19.9133 10.6169 19.5213L19.5219 10.6173C19.7095 10.4286 19.8148 10.1734 19.8148 9.9073C19.8148 9.64124 19.7095 9.38598 19.5219 9.1973Z"></path>
+              <path
+                d="M15.4059 9.4343L12.9439 11.8963C12.8743 11.9669 12.7915 12.0231 12.7002 12.0617C12.6088 12.1002 12.5108 12.1204 12.4116 12.1209C12.3125 12.1215 12.2142 12.1024 12.1225 12.0649C12.0307 12.0274 11.9472 11.9721 11.8769 11.9023C11.8064 11.8323 11.7506 11.7489 11.7127 11.6571C11.6748 11.5652 11.6556 11.4667 11.6562 11.3673C11.6569 11.268 11.6774 11.1697 11.7165 11.0784C11.7555 10.987 11.8125 10.9044 11.8839 10.8353L13.0719 9.6473H8.64189C7.70789 9.6473 6.95689 10.4213 6.95689 11.3973V12.8973C6.95689 13.0962 6.87788 13.287 6.73722 13.4276C6.59657 13.5683 6.40581 13.6473 6.20689 13.6473C6.00798 13.6473 5.81722 13.5683 5.67656 13.4276C5.53591 13.287 5.45689 13.0962 5.45689 12.8973V11.3973C5.45689 9.6023 6.86889 8.1473 8.64289 8.1473H13.0719L11.8719 6.9483C11.7353 6.80679 11.6598 6.6173 11.6616 6.42065C11.6634 6.22401 11.7424 6.03593 11.8815 5.89694C12.0206 5.75795 12.2088 5.67916 12.4054 5.67755C12.6021 5.67593 12.7915 5.75162 12.9329 5.8883L15.3459 8.3003C15.3568 8.31139 15.3675 8.32272 15.3779 8.3343L15.4129 8.3673C15.4833 8.43739 15.539 8.52079 15.5768 8.61264C15.6146 8.70449 15.6338 8.80295 15.6331 8.90227C15.6325 9.0016 15.612 9.0998 15.573 9.19114C15.534 9.28249 15.4772 9.36515 15.4059 9.4343ZM19.5219 9.1973L10.6169 0.293304C10.4283 0.105466 10.173 0 9.90689 0C9.64075 0 9.38544 0.105466 9.19689 0.293304L0.292893 9.1973C0.105299 9.38598 0 9.64124 0 9.9073C0 10.1734 0.105299 10.4286 0.292893 10.6173L9.19789 19.5213C9.58689 19.9113 10.2249 19.9133 10.6169 19.5213L19.5219 10.6173C19.7095 10.4286 19.8148 10.1734 19.8148 9.9073C19.8148 9.64124 19.7095 9.38598 19.5219 9.1973Z"
+              ></path>
             </svg>
             <span>Directions</span>
           </a>
@@ -925,8 +1105,8 @@
       </section>
 
       <div class="disclaimer">
-        <strong>Disclaimer:</strong> This is an independent, GitHub Pages–hosted layout inspired by a common “unit page” design.
-        It is not an official Church website and should not use official trademarks/logos without permission.
+        <strong>Disclaimer:</strong> This is an independent, GitHub Pages–hosted layout inspired by a common “unit page”
+        design. It is not an official Church website and should not use official trademarks/logos without permission.
       </div>
     </div>
   </main>
@@ -942,9 +1122,12 @@
           <p class="modal-subtitle" id="modalSubtitle"></p>
           <h3 class="modal-title" id="modalTitle"></h3>
         </div>
+
         <button class="modal-close" id="modalCloseBtn" type="button" aria-label="Close">
           <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M18.3 5.71a1 1 0 0 0-1.41 0L12 10.59 7.11 5.7A1 1 0 0 0 5.7 7.11L10.59 12 5.7 16.89a1 1 0 1 0 1.41 1.41L12 13.41l4.89 4.89a1 1 0 0 0 1.41-1.41L13.41 12l4.89-4.89a1 1 0 0 0 0-1.4Z"></path>
+            <path
+              d="M18.3 5.71a1 1 0 0 0-1.41 0L12 10.59 7.11 5.7A1 1 0 0 0 5.7 7.11L10.59 12 5.7 16.89a1 1 0 1 0 1.41 1.41L12 13.41l4.89 4.89a1 1 0 0 0 1.41-1.41L13.41 12l4.89-4.89a1 1 0 0 0 0-1.4Z"
+            ></path>
           </svg>
         </button>
       </div>
@@ -957,7 +1140,6 @@
         </button>
 
         <div class="modal-mainimg-wrap">
-          <div class="modal-loading" id="modalLoading">Loading…</div>
           <img class="modal-mainimg" id="modalMainImg" alt="Photo" />
         </div>
 
@@ -985,10 +1167,10 @@
     const CONFIG = {
       unitName: "Snow Canyon YSA Ward (26-35)",
       unitCityLine: "Events & Meeting Times",
-      welcomeText: "The Church of Jesus Christ of Latter-day Saints welcomes neighbors, families, and friends to join us for a variety of faith-based activities. This website is regularly updated with Sunday worship services and activities. Come join us! We welcome you to RSVP.",
+      welcomeText:
+        "The Church of Jesus Christ of Latter-day Saints welcomes neighbors, families, and friends to join us for a variety of faith-based activities. This website is regularly updated with Sunday worship services and activities. Come join us! We welcome you to RSVP.",
       service1: { title: "Sunday Service", time: "10:30 AM" },
-      service2: { title: "Gospel Study",  time: "11:30 AM" },
-
+      service2: { title: "Gospel Study", time: "11:30 AM" },
       address: {
         line1: "943 East 400 South",
         city: "St. George",
@@ -999,14 +1181,15 @@
       // Coordinates for the building
       lat: 37.101707,
       lng: -113.563324,
-
       zoom: 16,
 
       // Official ward page (More menu)
-      officialWardUrl: "https://local.churchofjesuschrist.org/en/units/us/ut/snow-canyon-ysa-ward-26-35?icid=actsh|uwm|web|mis|global|global",
+      officialWardUrl:
+        "https://local.churchofjesuschrist.org/en/units/us/ut/snow-canyon-ysa-ward-26-35?icid=actsh|uwm|web|mis|global|global",
 
       // Public Google Calendar embed you provided (full calendar)
-      calendarFullEmbedUrl: "https://calendar.google.com/calendar/embed?src=ff28b467e8f4848fe351a83f327c53f5aefaf745a55b9a47dcd4f9c7f08dd7a5%40group.calendar.google.com&ctz=America%2FDenver",
+      calendarFullEmbedUrl:
+        "https://calendar.google.com/calendar/embed?src=ff28b467e8f4848fe351a83f327c53f5aefaf745a55b9a47dcd4f9c7f08dd7a5%40group.calendar.google.com&ctz=America%2FDenver",
 
       // Unit history folders live here (repo + path)
       unitHistory: {
@@ -1016,23 +1199,20 @@
         branch: "main"
       }
     };
-    const HISTORY = {
-  folderItems: [],
-  activeFolderIndex: -1,
-  activeImageIndex: 0
-};
 
     // ----------------------------
     // Helpers
     // ----------------------------
-    function $(id){ return document.getElementById(id); }
+    function $(id) {
+      return document.getElementById(id);
+    }
 
-    function buildGoogleMapsQuery(addressObj){
+    function buildGoogleMapsQuery(addressObj) {
       const q = `${addressObj.line1}, ${addressObj.city}, ${addressObj.state} ${addressObj.zip}, US`;
       return `https://maps.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
     }
 
-    function showToast(message){
+    function showToast(message) {
       const el = $("toast");
       el.textContent = message;
       el.classList.add("show");
@@ -1040,12 +1220,12 @@
       showToast._t = setTimeout(() => el.classList.remove("show"), 1400);
     }
 
-    function closeAllMenus(){
+    function closeAllMenus() {
       $("shareMenu").classList.remove("open");
       $("moreMenu").classList.remove("open");
     }
 
-    function buildWeekEmbedFromFullEmbed(fullEmbedUrl){
+    function buildWeekEmbedFromFullEmbed(fullEmbedUrl) {
       // Force AGENDA view with minimal chrome.
       const u = new URL(fullEmbedUrl);
       u.searchParams.set("mode", "AGENDA");
@@ -1060,7 +1240,7 @@
       return u.toString();
     }
 
-    function escapeHtml(s){
+    function escapeHtml(s) {
       return String(s)
         .replaceAll("&", "&amp;")
         .replaceAll("<", "&lt;")
@@ -1068,18 +1248,24 @@
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#039;");
     }
-    // ----------------------------
 
-    function isImageFile(name){
+    function isImageFile(name) {
       const n = String(name || "").toLowerCase();
-      return n.endsWith(".jpg") || n.endsWith(".jpeg") || n.endsWith(".png") || n.endsWith(".webp") || n.endsWith(".gif");
+      return (
+        n.endsWith(".jpg") ||
+        n.endsWith(".jpeg") ||
+        n.endsWith(".png") ||
+        n.endsWith(".webp") ||
+        n.endsWith(".gif")
+      );
     }
 
-    function splitFolderName(folderName){
+    function splitFolderName(folderName) {
       // Split at the FIRST dash, but tolerate " - " and multiple dashes
+      // Example: "Fall scavenger hunt - FHE" => { title: "Fall scavenger hunt", subtitle: "FHE" }
       const raw = String(folderName || "").trim();
       const idx = raw.indexOf("-");
-      if (idx === -1){
+      if (idx === -1) {
         return { title: raw, subtitle: "" };
       }
       const left = raw.slice(0, idx).trim();
@@ -1087,8 +1273,9 @@
       return { title: left || raw, subtitle: right || "" };
     }
 
-    function prettyDateFromPrefix(s){
+    function prettyDateFromPrefix(s) {
       // If folder starts with an ISO-ish date like "2025-11-10 ..." show "10 November 2025"
+      // Works for: YYYY-MM-DD, YYYY_MM_DD, YYYY.MM.DD
       const raw = String(s || "").trim();
       const m = raw.match(/^(\d{4})[-_.](\d{2})[-_.](\d{2})/);
       if (!m) return "";
@@ -1097,591 +1284,564 @@
       const d = Number(m[3]);
       if (!y || mo < 1 || mo > 12 || d < 1 || d > 31) return "";
       const dt = new Date(Date.UTC(y, mo - 1, d));
-      const fmt = new Intl.DateTimeFormat("en-US", { day: "2-digit", month: "long", year: "numeric", timeZone: "UTC" });
+      const fmt = new Intl.DateTimeFormat("en-US", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+        timeZone: "UTC"
+      });
       return fmt.format(dt);
-    }
-
-    function naturalImageSort(aName, bName){
-      // sort like 001.jpeg, 002.jpeg, 010.jpeg properly
-      const ax = String(aName || "").toLowerCase();
-      const bx = String(bName || "").toLowerCase();
-      const an = ax.match(/\d+/);
-      const bn = bx.match(/\d+/);
-      if (an && bn){
-        const ai = parseInt(an[0], 10);
-        const bi = parseInt(bn[0], 10);
-        if (!Number.isNaN(ai) && !Number.isNaN(bi) && ai !== bi) return ai - bi;
-      }
-      return ax.localeCompare(bx);
     }
 
     // ----------------------------
     // Populate UI
     // ----------------------------
+    $("unitName").textContent = CONFIG.unitName;
+    $("unitCity").textContent = CONFIG.unitCityLine;
+    $("welcomeText").textContent = CONFIG.welcomeText;
+
+    $("serviceTitle1").textContent = CONFIG.service1.title;
+    $("serviceTime1").textContent = CONFIG.service1.time;
+
+    $("serviceTitle2").textContent = CONFIG.service2.title;
+    $("serviceTime2").textContent = CONFIG.service2.time;
+
+    $("addrLine1").textContent = CONFIG.address.line1;
+    $("addrCity").textContent = CONFIG.address.city;
+    $("addrState").textContent = CONFIG.address.state;
+    $("addrZip").textContent = CONFIG.address.zip;
+
+    const mapsUrl = buildGoogleMapsQuery(CONFIG.address);
+    $("directionsLink").href = mapsUrl;
+
+    // Social share fallback links
+    const pageUrl = window.location.href;
+    const shareText = `Check out ${CONFIG.unitName}`;
+    $("smsLink").href = `sms:?&body=${encodeURIComponent(shareText + " " + pageUrl)}`;
+    $("emailLink").href = `mailto:?subject=${encodeURIComponent(CONFIG.unitName)}&body=${encodeURIComponent(
+      shareText + "\n\n" + pageUrl
+    )}`;
+
+    // Events embed (AGENDA view) + header link to full calendar
+    const weekUrl = buildWeekEmbedFromFullEmbed(CONFIG.calendarFullEmbedUrl);
+    $("eventsIframe").src = weekUrl;
+    $("openCalendarHeaderLink").href = CONFIG.calendarFullEmbedUrl;
+
+    // Unit history "Open on GitHub" link
+    const historyRepoUrl = `https://github.com/${CONFIG.unitHistory.owner}/${CONFIG.unitHistory.repo}/tree/${CONFIG.unitHistory.branch}/${CONFIG.unitHistory.path}`;
+    $("openHistoryRepoLink").href = historyRepoUrl;
+
     // ----------------------------
-// Populate UI
-// ----------------------------
-$("unitName").textContent = CONFIG.unitName;
-$("unitCity").textContent = CONFIG.unitCityLine;
-$("welcome").textContent = "Welcome";
-$("welcomeText").textContent = CONFIG.welcomeText;
-
-$("serviceTitle1").textContent = CONFIG.service1.title;
-$("serviceTime1").textContent  = CONFIG.service1.time;
-$("serviceTitle2").textContent = CONFIG.service2.title;
-$("serviceTime2").textContent  = CONFIG.service2.time;
-
-$("addrLine1").textContent = CONFIG.address.line1;
-$("addrCity").textContent  = CONFIG.address.city;
-$("addrState").textContent = CONFIG.address.state;
-$("addrZip").textContent   = CONFIG.address.zip;
-
-const mapsUrl = buildGoogleMapsQuery(CONFIG.address);
-$("directionsLink").href = mapsUrl;
-    // Leaflet map init (original behavior)
-// ----------------------------
-const map = L.map("map").setView([CONFIG.lat, CONFIG.lng], CONFIG.zoom);
-
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  maxZoom: 19,
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
-
-L.marker([CONFIG.lat, CONFIG.lng])
-  .addTo(map)
-  .bindPopup(
-    `<strong>${escapeHtml(CONFIG.unitName)}</strong><br>
-     ${escapeHtml(CONFIG.address.line1)}<br>
-     ${escapeHtml(CONFIG.address.city)}, ${escapeHtml(CONFIG.address.state)} ${escapeHtml(CONFIG.address.zip)}`
-  );
-
-// Social share fallback links
-const pageUrl = window.location.href;
-const shareText = `Check out ${CONFIG.unitName}`;
-$("smsLink").href = `sms:?&body=${encodeURIComponent(shareText + " " + pageUrl)}`;
-$("emailLink").href = `mailto:?subject=${encodeURIComponent(CONFIG.unitName)}&body=${encodeURIComponent(shareText + "\n\n" + pageUrl)}`;
-// ----------------------------
-// ----------------------------
-// Share / More menus behavior (restore previous)
-// ----------------------------
-
-// Try native share sheet first when available (mobile), otherwise open the dropdown menu.
-$("shareBtn").addEventListener("click", async (e) => {
-  e.stopPropagation();
-
-  if (navigator.share) {
-    try {
-      await navigator.share({
-        title: CONFIG.unitName,
-        text: `Check out ${CONFIG.unitName}`,
-        url: window.location.href
-      });
-      // Success: done
-      return;
-    } catch (err) {
-      // Cancel/fail: fall through to dropdown
-    }
-  }
-
-  const open = $("shareMenu").classList.toggle("open");
-  if (open) $("moreMenu").classList.remove("open");
-});
-
-$("moreBtn").addEventListener("click", (e) => {
-  e.stopPropagation();
-  const open = $("moreMenu").classList.toggle("open");
-  if (open) $("shareMenu").classList.remove("open");
-});
-
-// Close menus when clicking anywhere else
-document.addEventListener("click", () => closeAllMenus());
-
-// Copy link
-$("copyLinkBtn").addEventListener("click", async () => {
-  try{
-    await navigator.clipboard.writeText(window.location.href);
-    showToast("Link copied");
-  }catch(err){
-    // fallback
-    const ta = document.createElement("textarea");
-    ta.value = window.location.href;
-    document.body.appendChild(ta);
-    ta.select();
-    document.execCommand("copy");
-    ta.remove();
-    showToast("Link copied");
-  }
-  closeAllMenus();
-});
-
-// Print
-$("printBtn").addEventListener("click", () => {
-  closeAllMenus();
-  window.print();
-});
-// Events embed + header link to full calendar
-const weekUrl = buildWeekEmbedFromFullEmbed(CONFIG.calendarFullEmbedUrl);
-$("eventsIframe").src = weekUrl;
-$("openCalendarHeaderLink").href = CONFIG.calendarFullEmbedUrl;
-
-// Unit history "Open on GitHub" link
-const historyRepoUrl =
-  `https://github.com/${CONFIG.unitHistory.owner}/${CONFIG.unitHistory.repo}/tree/${CONFIG.unitHistory.branch}/${CONFIG.unitHistory.path}`;
-$("openHistoryRepoLink").href = historyRepoUrl;
-
-  function ghApiBase(){
-    const { owner, repo } = CONFIG.unitHistory;
-    return `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}`;
-  }
-
-  function ghRepoWebBase(){
-    const { owner, repo } = CONFIG.unitHistory;
-    return `https://github.com/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}`;
-  }
-
-  // Build a raw.githubusercontent.com URL that properly encodes each path segment.
-  function ghRawUrl(filePath){
-    const { owner, repo, branch } = CONFIG.unitHistory;
-    const safePath = String(filePath || "")
-      .split("/")
-      .map(seg => encodeURIComponent(seg))
-      .join("/");
-    return `https://raw.githubusercontent.com/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/${encodeURIComponent(branch)}/${safePath}`;
-  }
-
-  function setHistoryStatus(text){
-    const el = $("historyStatus");
-    if (!el) return;
-    el.textContent = text;
-    el.style.display = text ? "block" : "none";
-  }
-
-  function clearHistoryGrid(){
-    const grid = $("historyGrid");
-    if (grid) grid.innerHTML = "";
-  }
-
-  function sortFoldersSmart(folders){
-    // Prefer date-ish prefix (newest first). If no date, fall back to name (descending).
-    const toKey = (name) => {
-      const m = String(name || "").trim().match(/^(\d{4})[-_.](\d{2})[-_.](\d{2})/);
-      if (!m) return null;
-      const y = Number(m[1]), mo = Number(m[2]), d = Number(m[3]);
-      if (!y || mo < 1 || mo > 12 || d < 1 || d > 31) return null;
-      return Date.UTC(y, mo - 1, d);
-    };
-
-    return folders.slice().sort((a, b) => {
-      const ka = toKey(a.name);
-      const kb = toKey(b.name);
-      if (ka !== null && kb !== null) return kb - ka;
-      if (ka !== null && kb === null) return -1;
-      if (ka === null && kb !== null) return 1;
-      return String(b.name).localeCompare(String(a.name));
-    });
-  }
-
-  function sortImagesSmart(images){
-    // Sort like: 001.jpeg, 002.jpeg ... then anything else
-    const toNum = (name) => {
-      const m = String(name || "").match(/^(\d+)\./);
-      return m ? Number(m[1]) : null;
-    };
-    return images.slice().sort((a, b) => {
-      const na = toNum(a.name);
-      const nb = toNum(b.name);
-      if (na !== null && nb !== null) return na - nb;
-      if (na !== null && nb === null) return -1;
-      if (na === null && nb !== null) return 1;
-      return String(a.name).localeCompare(String(b.name));
-    });
-  }
-
-  async function ghFetchJson(url){
-    const res = await fetch(url, {
-      headers: { "Accept": "application/vnd.github+json" },
-      cache: "no-store"
-    });
-    if (!res.ok){
-      const txt = await res.text().catch(() => "");
-      const msg = `GitHub request failed (${res.status}). ${txt ? txt.slice(0, 160) : ""}`.trim();
-      throw new Error(msg);
-    }
-    return res.json();
-  }
+    // Map (Leaflet + OSM)
     // ----------------------------
-// Come Follow Me widget loader
-// ----------------------------
-async function loadComeFollowMeWidget(){
-  const smallEl = $("cfmSmallHeading");
-  const bigEl = $("cfmBigHeading");
-  const openEl = $("cfmOpenLink");
-  const imgLinkEl = $("cfmImageLink");
-  const imgEl = $("cfmImg");
+    const map = L.map("map", {
+      scrollWheelZoom: true,
+      touchZoom: true,
+      dragging: true,
+      tap: true
+    }).setView([CONFIG.lat, CONFIG.lng], CONFIG.zoom);
 
-  // Safe defaults so it never looks broken
-  smallEl.textContent = "This week";
-  bigEl.textContent = "Come, Follow Me";
-  openEl.href = "#";
-  imgLinkEl.href = "#";
-  imgEl.removeAttribute("src");
+    map.options.wheelPxPerZoomLevel = 120;
 
-  // IMPORTANT: this path must match your repo file location
-  const jsonPath = "data/come_follow_me_this_week.json";
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: "&copy; OpenStreetMap contributors"
+    }).addTo(map);
 
-  let data;
-  try{
-    const res = await fetch(jsonPath, { cache: "no-store" });
-    if (!res.ok) throw new Error(`CFM JSON fetch failed: ${res.status}`);
-    data = await res.json();
-  }catch(err){
-    console.error(err);
-    smallEl.textContent = "Come Follow Me";
-    bigEl.textContent = "Unable to load right now";
-    // Leave links disabled
-    openEl.style.pointerEvents = "none";
-    imgLinkEl.style.pointerEvents = "none";
-    openEl.style.opacity = "0.6";
-    imgLinkEl.style.opacity = "0.6";
-    return;
-  }
+    // Ward boundary overlay (GeoJSON)
+    const WARD_BOUNDARY_GEOJSON_URL =
+      "https://kdidso.github.io/snow-canyon-map/ward_boundaries_JSO.geojson";
 
-  // Expected fields (we’ll tolerate missing ones)
-  // Recommend your JSON have:
-  // {
-  //   "small_heading": "...",
-  //   "big_heading": "...",
-  //   "url": "https://...",
-  //   "image_url": "https://..."
-  // }
+    fetch(WARD_BOUNDARY_GEOJSON_URL)
+      .then((r) => {
+        if (!r.ok) throw new Error(`Failed to load boundary GeoJSON (${r.status})`);
+        return r.json();
+      })
+      .then((geojson) => {
+        const boundaryLayer = L.geoJSON(geojson, {
+          interactive: false,
+          style: () => ({
+            color: "#157493",
+            weight: 3,
+            opacity: 0.95,
+            fill: false
+          })
+        }).addTo(map);
 
-  const small = data.small_heading || data.smallHeading || data.week || "This week";
-  const big   = data.big_heading   || data.bigHeading   || data.title || "Come, Follow Me";
-  const url   = data.url || data.link || "";
-  const img   = data.image_url || data.imageUrl || data.image || "";
+        map.fitBounds(boundaryLayer.getBounds(), { padding: [20, 20] });
+      })
+      .catch((err) => console.error(err));
 
-  smallEl.textContent = String(small);
-  bigEl.textContent = String(big);
+    const marker = L.marker([CONFIG.lat, CONFIG.lng]).addTo(map);
 
-  // Set links (only if present)
-  if (url){
-    openEl.href = url;
-    imgLinkEl.href = url;
-    openEl.style.pointerEvents = "auto";
-    imgLinkEl.style.pointerEvents = "auto";
-    openEl.style.opacity = "1";
-    imgLinkEl.style.opacity = "1";
-  }else{
-    openEl.href = "#";
-    imgLinkEl.href = "#";
-    openEl.style.pointerEvents = "none";
-    imgLinkEl.style.pointerEvents = "none";
-    openEl.style.opacity = "0.6";
-    imgLinkEl.style.opacity = "0.6";
-  }
+    marker.bindPopup(`
+      <strong>${escapeHtml(CONFIG.unitName)}</strong><br>
+      ${escapeHtml(CONFIG.address.line1)}<br>
+      ${escapeHtml(CONFIG.address.city)}, ${escapeHtml(CONFIG.address.state)} ${escapeHtml(CONFIG.address.zip)}<br><br>
+      <a href="${mapsUrl}" target="_blank" rel="noopener">Open directions</a>
+    `);
 
-  // Set image (only if present)
-  if (img){
-    imgEl.src = img;
-  }else{
-    // If no image, keep it from showing broken icon
-    imgEl.removeAttribute("src");
-    imgEl.style.background = "#e5e7eb";
-  }
-}
+    // ----------------------------
+    // Share button logic
+    // ----------------------------
+    $("shareBtn").addEventListener("click", async (e) => {
+      e.stopPropagation();
 
-  async function loadUnitHistoryWidget(){
-    setHistoryStatus("Loading folders…");
-    clearHistoryGrid();
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: CONFIG.unitName,
+            text: shareText,
+            url: pageUrl
+          });
+          return;
+        } catch (err) {
+          // fall through to dropdown
+        }
+      }
 
-    const { path, branch } = CONFIG.unitHistory;
+      const menu = $("shareMenu");
+      const willOpen = !menu.classList.contains("open");
+      closeAllMenus();
+      if (willOpen) menu.classList.add("open");
+    });
 
-    const listUrl = `${ghApiBase()}/contents/${encodeURIComponent(path)}?ref=${encodeURIComponent(branch)}`;
+    $("copyLinkBtn").addEventListener("click", async (e) => {
+      e.stopPropagation();
 
-    let items;
-    try{
-      items = await ghFetchJson(listUrl);
-    }catch(err){
-      console.error(err);
-      setHistoryStatus("Unable to load folders right now (GitHub API). If you refresh and it still fails, you may be rate-limited.");
-      return;
-    }
+      try {
+        await navigator.clipboard.writeText(pageUrl);
+        showToast("Copied link");
+      } catch (err) {
+        const ta = document.createElement("textarea");
+        ta.value = pageUrl;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+        showToast("Copied link");
+      }
 
-    if (!Array.isArray(items)){
-      setHistoryStatus("No folders found (unexpected GitHub response).");
-      return;
-    }
+      closeAllMenus();
+    });
 
-    const folders = sortFoldersSmart(items.filter(it => it && it.type === "dir"));
-    if (folders.length === 0){
-      setHistoryStatus("No event photo folders found yet.");
-      return;
-    }
+    // ----------------------------
+    // More options menu
+    // ----------------------------
+    $("moreBtn").addEventListener("click", (e) => {
+      e.stopPropagation();
+      const menu = $("moreMenu");
+      const willOpen = !menu.classList.contains("open");
+      closeAllMenus();
+      if (willOpen) menu.classList.add("open");
+    });
 
-    const out = [];
-    for (let i = 0; i < folders.length; i++){
-      const f = folders[i];
-      setHistoryStatus(`Loading folders… (${i + 1}/${folders.length})`);
+    $("printBtn").addEventListener("click", (e) => {
+      e.stopPropagation();
+      closeAllMenus();
+      window.print();
+    });
 
-      const folderApiUrl = `${ghApiBase()}/contents/${encodeURIComponent(f.path)}?ref=${encodeURIComponent(branch)}`;
+    // Close menus on outside click / escape
+    document.addEventListener("click", () => closeAllMenus());
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeAllMenus();
+    });
 
-      let children = [];
-      try{
-        children = await ghFetchJson(folderApiUrl);
-      }catch(err){
+    // Prevent menu clicks from closing immediately
+    $("shareMenu").addEventListener("click", (e) => e.stopPropagation());
+    $("moreMenu").addEventListener("click", (e) => e.stopPropagation());
+
+    // ----------------------------
+    // Come Follow Me widget (loads local JSON produced by GitHub Action)
+    // ----------------------------
+    async function loadComeFollowMeWidget() {
+      const jsonUrl = "./data/come_follow_me_this_week.json";
+
+      try {
+        const res = await fetch(jsonUrl, { cache: "no-store" });
+        if (!res.ok) throw new Error(`Failed to load ${jsonUrl} (${res.status})`);
+        const data = await res.json();
+
+        const small = document.getElementById("cfmSmallHeading");
+        const big = document.getElementById("cfmBigHeading");
+        const img = document.getElementById("cfmImg");
+        const open = document.getElementById("cfmOpenLink");
+        const imgLink = document.getElementById("cfmImageLink");
+
+        if (small) small.textContent = data.small_heading || "";
+        if (big) big.textContent = data.big_heading || "";
+
+        if (img) {
+          img.src = data.image_url || "";
+          img.alt = data.big_heading ? `Come Follow Me: ${data.big_heading}` : "Come Follow Me image";
+        }
+
+        const lessonUrl = data.source_url || "#";
+        if (open) open.href = lessonUrl;
+        if (imgLink) imgLink.href = lessonUrl;
+      } catch (err) {
         console.error(err);
+        const big = document.getElementById("cfmBigHeading");
+        if (big) big.textContent = "Unable to load this week’s lesson right now.";
+      }
+    }
+
+    loadComeFollowMeWidget();
+
+    // ----------------------------
+    // Unit history widget (loads folders + thumbnails from GitHub)
+    // Uses GitHub Contents API (no directory listing needed)
+    // ----------------------------
+    const HISTORY = {
+      folderItems: [], // [{name, path, html_url, images:[{name, download_url, html_url}]}]
+      activeFolderIndex: -1,
+      activeImageIndex: 0
+    };
+
+    function ghApiBase() {
+      const { owner, repo } = CONFIG.unitHistory;
+      return `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}`;
+    }
+
+    function ghRepoWebBase() {
+      const { owner, repo } = CONFIG.unitHistory;
+      return `https://github.com/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}`;
+    }
+
+    function setHistoryStatus(text) {
+      const el = $("historyStatus");
+      if (!el) return;
+      el.textContent = text;
+      el.style.display = text ? "block" : "none";
+    }
+
+    function clearHistoryGrid() {
+      const grid = $("historyGrid");
+      if (grid) grid.innerHTML = "";
+    }
+
+    function sortFoldersSmart(folders) {
+      // Prefer date-ish prefix (newest first). If no date, fall back to name (descending).
+      const toKey = (name) => {
+        const m = String(name || "").trim().match(/^(\d{4})[-_.](\d{2})[-_.](\d{2})/);
+        if (!m) return null;
+        const y = Number(m[1]),
+          mo = Number(m[2]),
+          d = Number(m[3]);
+        if (!y || mo < 1 || mo > 12 || d < 1 || d > 31) return null;
+        return Date.UTC(y, mo - 1, d);
+      };
+
+      return folders.slice().sort((a, b) => {
+        const ka = toKey(a.name);
+        const kb = toKey(b.name);
+        if (ka !== null && kb !== null) return kb - ka; // newest first
+        if (ka !== null && kb === null) return -1;
+        if (ka === null && kb !== null) return 1;
+        return String(b.name).localeCompare(String(a.name)); // descending
+      });
+    }
+
+    async function ghFetchJson(url) {
+      const res = await fetch(url, {
+        headers: { Accept: "application/vnd.github+json" },
+        cache: "no-store"
+      });
+
+      if (!res.ok) {
+        const txt = await res.text().catch(() => "");
+        const msg = `GitHub request failed (${res.status}). ${
+          txt ? txt.slice(0, 120) : ""
+        }`.trim();
+        throw new Error(msg);
+      }
+
+      return res.json();
+    }
+
+    async function loadUnitHistoryWidget() {
+      setHistoryStatus("Loading folders…");
+      clearHistoryGrid();
+
+      const { path, branch } = CONFIG.unitHistory;
+
+      // List folder entries under unit-history/events
+      // NOTE: per_page is not supported on this endpoint; it returns all children for a directory (usually OK).
+      const listUrl = `${ghApiBase()}/contents/${encodeURIComponent(path)}?ref=${encodeURIComponent(branch)}`;
+
+      let items;
+      try {
+        items = await ghFetchJson(listUrl);
+      } catch (err) {
+        console.error(err);
+        setHistoryStatus(
+          "Unable to load folders right now (GitHub API). If you refresh and it still fails, you may be rate-limited."
+        );
+        return;
+      }
+
+      if (!Array.isArray(items)) {
+        setHistoryStatus("No folders found (unexpected GitHub response).");
+        return;
+      }
+
+      const folders = sortFoldersSmart(items.filter((it) => it && it.type === "dir"));
+      if (folders.length === 0) {
+        setHistoryStatus("No event photo folders found yet.");
+        return;
+      }
+
+      // Load images for each folder (sequential to be nicer to GitHub API)
+      const out = [];
+
+      for (let i = 0; i < folders.length; i++) {
+        const f = folders[i];
+        setHistoryStatus(`Loading folders… (${i + 1}/${folders.length})`);
+
+        const folderApiUrl = `${ghApiBase()}/contents/${encodeURIComponent(f.path)}?ref=${encodeURIComponent(branch)}`;
+
+        let children = [];
+        try {
+          children = await ghFetchJson(folderApiUrl);
+        } catch (err) {
+          console.error(err);
+          // Keep folder, but mark as empty
+          out.push({
+            name: f.name,
+            path: f.path,
+            html_url: f.html_url || `${ghRepoWebBase()}/tree/${branch}/${f.path}`,
+            images: []
+          });
+          continue;
+        }
+
+        const images = (Array.isArray(children) ? children : [])
+          .filter((ch) => ch && ch.type === "file" && isImageFile(ch.name))
+          .map((ch) => ({
+            name: ch.name,
+            download_url: ch.download_url || "",
+            html_url: ch.html_url || ""
+          }));
+
         out.push({
           name: f.name,
           path: f.path,
           html_url: f.html_url || `${ghRepoWebBase()}/tree/${branch}/${f.path}`,
-          images: []
+          images
         });
-        continue;
       }
 
-      let images = (Array.isArray(children) ? children : [])
-        .filter(ch => ch && ch.type === "file" && isImageFile(ch.name))
-        .map(ch => ({
-          name: ch.name,
-          // RELIABLE RAW URL (fixes “sometimes blank”)
-          raw_url: ghRawUrl(ch.path),
-          html_url: ch.html_url || ""
-        }));
-
-      images = sortImagesSmart(images);
-
-      out.push({
-        name: f.name,
-        path: f.path,
-        html_url: f.html_url || `${ghRepoWebBase()}/tree/${branch}/${f.path}`,
-        images
-      });
+      HISTORY.folderItems = out;
+      renderHistoryGrid();
+      setHistoryStatus("");
     }
 
-    HISTORY.folderItems = out;
+    function renderHistoryGrid() {
+      const grid = $("historyGrid");
+      if (!grid) return;
+      grid.innerHTML = "";
 
-    renderHistoryGrid();
-    setHistoryStatus("");
-  }
+      const folders = HISTORY.folderItems || [];
+      if (!folders.length) {
+        setHistoryStatus("No folders to show.");
+        return;
+      }
 
-  function renderHistoryGrid(){
-    const grid = $("historyGrid");
-    if (!grid) return;
-    grid.innerHTML = "";
+      const frag = document.createDocumentFragment();
 
-    const folders = HISTORY.folderItems || [];
-    if (!folders.length){
-      setHistoryStatus("No folders to show.");
-      return;
+      for (let i = 0; i < folders.length; i++) {
+        const f = folders[i];
+        const { title, subtitle } = splitFolderName(f.name);
+        const dateLine = prettyDateFromPrefix(f.name);
+
+        const thumb = f.images && f.images.length ? f.images[0].download_url : "";
+        const count = f.images && f.images.length ? f.images.length : 0;
+
+        const card = document.createElement("div");
+        card.className = "folder-card";
+        card.setAttribute("role", "button");
+        card.setAttribute("tabindex", "0");
+        card.setAttribute("aria-label", `Open folder ${f.name}`);
+        card.dataset.folderIndex = String(i);
+
+        const thumbHtml = thumb
+          ? `<img src="${escapeHtml(thumb)}" alt="${escapeHtml(f.name)} thumbnail" loading="lazy">`
+          : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#6b7280;font-weight:800;font-size:12px;">No image</div>`;
+
+        card.innerHTML = `
+          <div class="folder-thumb">${thumbHtml}</div>
+          <div class="folder-meta">
+            ${
+              subtitle
+                ? `<p class="folder-subtitle">${escapeHtml(subtitle)}</p>`
+                : `<p class="folder-subtitle" style="visibility:hidden;">&nbsp;</p>`
+            }
+            <p class="folder-title">${escapeHtml(title)}</p>
+            ${
+              dateLine
+                ? `<div class="folder-date">${escapeHtml(dateLine)}</div>`
+                : `<div class="folder-date" style="visibility:hidden;">&nbsp;</div>`
+            }
+            <div class="folder-count">${
+              count ? `${count} photo${count === 1 ? "" : "s"}` : "No photos found"
+            }</div>
+          </div>
+        `;
+
+        card.addEventListener("click", () => openFolderModal(i));
+        card.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            openFolderModal(i);
+          }
+        });
+
+        frag.appendChild(card);
+      }
+
+      grid.appendChild(frag);
     }
 
-    const frag = document.createDocumentFragment();
+    // ----------------------------
+    // Modal / gallery logic
+    // ----------------------------
+    function openFolderModal(folderIndex) {
+      const folders = HISTORY.folderItems || [];
+      const f = folders[folderIndex];
+      if (!f) return;
 
-    for (let i = 0; i < folders.length; i++){
-      const f = folders[i];
+      HISTORY.activeFolderIndex = folderIndex;
+      HISTORY.activeImageIndex = 0;
+
       const { title, subtitle } = splitFolderName(f.name);
-      const dateLine = prettyDateFromPrefix(f.name);
+      $("modalTitle").textContent = title || f.name;
+      $("modalSubtitle").textContent = subtitle || "";
 
-      const thumb = (f.images && f.images.length ? f.images[0].raw_url : "");
-      const count = (f.images && f.images.length ? f.images.length : 0);
+      // If empty, show a friendly message in modal
+      if (!f.images || f.images.length === 0) {
+        $("modalMainImg").src = "";
+        $("modalMainImg").alt = "No photos available";
+        $("modalMainImg").style.display = "none";
+        $("modalCounter").textContent = "No photos in this folder.";
+        $("modalOpenRawLink").href = f.html_url || historyRepoUrl;
+        $("modalOpenRawLink").textContent = "Open folder";
+        $("modalThumbStrip").innerHTML = "";
+        $("historyModal").classList.add("open");
+        document.body.style.overflow = "hidden";
+        return;
+      }
 
-      const card = document.createElement("div");
-      card.className = "folder-card";
-      card.setAttribute("role", "button");
-      card.setAttribute("tabindex", "0");
-      card.setAttribute("aria-label", `Open folder ${f.name}`);
-      card.dataset.folderIndex = String(i);
+      $("modalMainImg").style.display = "block";
+      $("modalOpenRawLink").textContent = "Open image";
 
-      const thumbHtml = thumb
-        ? `<img src="${escapeHtml(thumb)}" alt="${escapeHtml(f.name)} thumbnail" loading="lazy" decoding="async">`
-        : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#6b7280;font-weight:800;font-size:12px;">No image</div>`;
+      buildThumbStrip();
+      showActiveImage();
 
-      card.innerHTML = `
-        <div class="folder-thumb">${thumbHtml}</div>
-        <div class="folder-meta">
-          ${subtitle ? `<p class="folder-subtitle">${escapeHtml(subtitle)}</p>` : `<p class="folder-subtitle" style="visibility:hidden;">&nbsp;</p>`}
-          <p class="folder-title">${escapeHtml(title)}</p>
-          ${dateLine ? `<div class="folder-date">${escapeHtml(dateLine)}</div>` : `<div class="folder-date" style="visibility:hidden;">&nbsp;</div>`}
-          <div class="folder-count">${count ? `${count} photo${count === 1 ? "" : "s"}` : "No photos found"}</div>
-        </div>
-      `;
-
-      card.addEventListener("click", () => openFolderModal(i));
-      card.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" || e.key === " "){
-          e.preventDefault();
-          openFolderModal(i);
-        }
-      });
-
-      frag.appendChild(card);
-    }
-
-    grid.appendChild(frag);
-  }
-
-  // ----------------------------
-  // Modal / gallery logic
-  // ----------------------------
-  function setNavVisibilityForFolder(folder){
-    const hasMany = folder && folder.images && folder.images.length > 1;
-    $("modalPrevBtn").style.visibility = hasMany ? "visible" : "hidden";
-    $("modalNextBtn").style.visibility = hasMany ? "visible" : "hidden";
-  }
-
-  function openFolderModal(folderIndex){
-    const folders = HISTORY.folderItems || [];
-    const f = folders[folderIndex];
-    if (!f) return;
-
-    HISTORY.activeFolderIndex = folderIndex;
-    HISTORY.activeImageIndex = 0;
-
-    const { title, subtitle } = splitFolderName(f.name);
-    $("modalTitle").textContent = title || f.name;
-    $("modalSubtitle").textContent = subtitle || "";
-
-    setNavVisibilityForFolder(f);
-
-    if (!f.images || f.images.length === 0){
-      $("modalMainImg").src = "";
-      $("modalMainImg").alt = "No photos available";
-      $("modalMainImg").style.display = "none";
-      $("modalCounter").textContent = "No photos in this folder.";
-      $("modalOpenRawLink").href = f.html_url || historyRepoUrl;
-      $("modalOpenRawLink").textContent = "Open folder";
-      $("modalThumbStrip").innerHTML = "";
       $("historyModal").classList.add("open");
       document.body.style.overflow = "hidden";
-      return;
     }
 
-    $("modalMainImg").style.display = "block";
-    $("modalOpenRawLink").textContent = "Open image";
+    function closeFolderModal() {
+      $("historyModal").classList.remove("open");
+      document.body.style.overflow = "";
+      HISTORY.activeFolderIndex = -1;
+      HISTORY.activeImageIndex = 0;
+    }
 
-    buildThumbStrip();
-    showActiveImage(true);
+    function buildThumbStrip() {
+      const strip = $("modalThumbStrip");
+      strip.innerHTML = "";
 
-    $("historyModal").classList.add("open");
-    document.body.style.overflow = "hidden";
-  }
+      const f = HISTORY.folderItems[HISTORY.activeFolderIndex];
+      if (!f || !f.images || !f.images.length) return;
 
-  function closeFolderModal(){
-    $("historyModal").classList.remove("open");
-    document.body.style.overflow = "";
-    HISTORY.activeFolderIndex = -1;
-    HISTORY.activeImageIndex = 0;
-  }
+      const frag = document.createDocumentFragment();
 
-  function buildThumbStrip(){
-    const strip = $("modalThumbStrip");
-    strip.innerHTML = "";
+      for (let i = 0; i < f.images.length; i++) {
+        const img = f.images[i];
+        const t = document.createElement("div");
+        t.className = "thumb";
+        t.dataset.thumbIndex = String(i);
+        t.innerHTML = `<img src="${escapeHtml(img.download_url)}" alt="Thumbnail ${i + 1}" loading="lazy">`;
 
-    const f = HISTORY.folderItems[HISTORY.activeFolderIndex];
-    if (!f || !f.images || !f.images.length) return;
+        t.addEventListener("click", () => {
+          HISTORY.activeImageIndex = i;
+          showActiveImage();
+        });
 
-    const frag = document.createDocumentFragment();
+        frag.appendChild(t);
+      }
 
-    for (let i = 0; i < f.images.length; i++){
-      const img = f.images[i];
-      const t = document.createElement("div");
-      t.className = "thumb";
-      t.dataset.thumbIndex = String(i);
-      t.innerHTML = `<img src="${escapeHtml(img.raw_url)}" alt="Thumbnail ${i + 1}" loading="lazy" decoding="async">`;
+      strip.appendChild(frag);
+    }
 
-      t.addEventListener("click", () => {
-        HISTORY.activeImageIndex = i;
-        showActiveImage();
+    function showActiveImage() {
+      const f = HISTORY.folderItems[HISTORY.activeFolderIndex];
+      if (!f || !f.images || !f.images.length) return;
+
+      const idx = Math.max(0, Math.min(HISTORY.activeImageIndex, f.images.length - 1));
+      HISTORY.activeImageIndex = idx;
+
+      const imgObj = f.images[idx];
+      const imgEl = $("modalMainImg");
+
+      imgEl.src = imgObj.download_url;
+      imgEl.alt = imgObj.name || `Photo ${idx + 1}`;
+
+      $("modalCounter").textContent = `${idx + 1} / ${f.images.length}`;
+
+      // Link opens the raw image (download_url) which is perfect for share/save
+      $("modalOpenRawLink").href = imgObj.download_url || (imgObj.html_url || f.html_url || historyRepoUrl);
+
+      // Highlight active thumb
+      const thumbs = $("modalThumbStrip").querySelectorAll(".thumb");
+      thumbs.forEach((t, i) => {
+        if (i === idx) t.classList.add("active");
+        else t.classList.remove("active");
       });
 
-      frag.appendChild(t);
+      // Ensure the active thumb stays visible
+      const activeThumb = $("modalThumbStrip").querySelector(`.thumb[data-thumb-index="${idx}"]`);
+      if (activeThumb) {
+        activeThumb.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "smooth" });
+      }
     }
 
-    strip.appendChild(frag);
-  }
+    function nextImage() {
+      const f = HISTORY.folderItems[HISTORY.activeFolderIndex];
+      if (!f || !f.images || !f.images.length) return;
+      HISTORY.activeImageIndex = (HISTORY.activeImageIndex + 1) % f.images.length;
+      showActiveImage();
+    }
 
-  function showActiveImage(isFirstOpen){
-    const f = HISTORY.folderItems[HISTORY.activeFolderIndex];
-    if (!f || !f.images || !f.images.length) return;
+    function prevImage() {
+      const f = HISTORY.folderItems[HISTORY.activeFolderIndex];
+      if (!f || !f.images || !f.images.length) return;
+      HISTORY.activeImageIndex = (HISTORY.activeImageIndex - 1 + f.images.length) % f.images.length;
+      showActiveImage();
+    }
 
-    const idx = Math.max(0, Math.min(HISTORY.activeImageIndex, f.images.length - 1));
-    HISTORY.activeImageIndex = idx;
+    // Modal event hooks
+    $("modalCloseBtn").addEventListener("click", closeFolderModal);
+    $("modalNextBtn").addEventListener("click", nextImage);
+    $("modalPrevBtn").addEventListener("click", prevImage);
 
-    const imgObj = f.images[idx];
-    const imgEl = $("modalMainImg");
-
-    // Fade-in to avoid “blank pane” flashes
-    imgEl.style.opacity = "0";
-    imgEl.style.transition = "opacity 140ms ease";
-    imgEl.decoding = "async";
-    imgEl.loading = "eager";
-
-    // Clear old handlers
-    imgEl.onload = null;
-    imgEl.onerror = null;
-
-    imgEl.onload = () => {
-  imgEl.classList.add("is-loaded");
-};
-
-
-    // If a raw image fails for any reason, keep the UI stable and show a message link.
-    imgEl.onerror = () => {
-      imgEl.style.opacity = "1";
-      $("modalCounter").textContent = `Unable to load image (${idx + 1} / ${f.images.length})`;
-    };
-    imgEl.classList.remove("is-loaded");
-
-    imgEl.src = imgObj.raw_url;
-    imgEl.alt = imgObj.name || `Photo ${idx + 1}`;
-
-    $("modalCounter").textContent = `${idx + 1} / ${f.images.length}`;
-    $("modalOpenRawLink").href = imgObj.raw_url || (imgObj.html_url || f.html_url || historyRepoUrl);
-
-    const thumbs = $("modalThumbStrip").querySelectorAll(".thumb");
-    thumbs.forEach((t, i) => {
-      if (i === idx) t.classList.add("active");
-      else t.classList.remove("active");
+    // Close modal when clicking backdrop
+    $("historyModal").addEventListener("click", (e) => {
+      if (e.target === $("historyModal")) closeFolderModal();
     });
 
-    const activeThumb = $("modalThumbStrip").querySelector(`.thumb[data-thumb-index="${idx}"]`);
-    if (activeThumb && !isFirstOpen){
-      activeThumb.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "smooth" });
-    }
-  }
+    // Keyboard controls (only when modal is open)
+    document.addEventListener("keydown", (e) => {
+      if (!$("historyModal").classList.contains("open")) return;
+      if (e.key === "Escape") closeFolderModal();
+      if (e.key === "ArrowRight") nextImage();
+      if (e.key === "ArrowLeft") prevImage();
+    });
 
-  function nextImage(){
-    const f = HISTORY.folderItems[HISTORY.activeFolderIndex];
-    if (!f || !f.images || !f.images.length) return;
-    HISTORY.activeImageIndex = (HISTORY.activeImageIndex + 1) % f.images.length;
-    showActiveImage();
-  }
-
-  function prevImage(){
-    const f = HISTORY.folderItems[HISTORY.activeFolderIndex];
-    if (!f || !f.images || !f.images.length) return;
-    HISTORY.activeImageIndex = (HISTORY.activeImageIndex - 1 + f.images.length) % f.images.length;
-    showActiveImage();
-  }
-
-  $("modalCloseBtn").addEventListener("click", closeFolderModal);
-  $("modalNextBtn").addEventListener("click", nextImage);
-  $("modalPrevBtn").addEventListener("click", prevImage);
-
-  $("historyModal").addEventListener("click", (e) => {
-    if (e.target === $("historyModal")) closeFolderModal();
-  });
-
-  document.addEventListener("keydown", (e) => {
-    if (!$("historyModal").classList.contains("open")) return;
-    if (e.key === "Escape") closeFolderModal();
-    if (e.key === "ArrowRight") nextImage();
-    if (e.key === "ArrowLeft") prevImage();
-  });
-
-  // Kick it off
-  loadUnitHistoryWidget();
-  loadComeFollowMeWidget();
+    // Kick it off
+    loadUnitHistoryWidget();
   </script>
 </body>
 </html>
