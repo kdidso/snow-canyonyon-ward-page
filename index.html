@@ -1202,19 +1202,23 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <!-- Unit history modal -->
-  <div class="modal-titles">
-  <p class="modal-subtitle" id="modalSubtitle"></p>
-  <h3 class="modal-title" id="modalTitle"></h3>
+    <!-- Unit history modal -->
+  <div class="modal" id="historyModal" aria-hidden="true">
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-label="Photo viewer">
+      <div class="modal-head">
+        <div class="modal-titles">
+          <p class="modal-subtitle" id="modalSubtitle"></p>
+          <h3 class="modal-title" id="modalTitle"></h3>
 
-  <!-- Facebook-like URL bar -->
-  <div class="modal-linkbar" aria-label="Photo link">
-    <div class="modal-linklabel">Link</div>
-    <div class="modal-linkbox">
-      <div class="modal-linktext" id="modalLinkText">—</div>
-      <button class="modal-linkbtn" id="modalCopyLinkBtn" type="button">Copy</button>
-    </div>
-  </div>
-</div>
+          <!-- Facebook-like URL bar -->
+          <div class="modal-linkbar" aria-label="Photo link">
+            <div class="modal-linklabel">Link</div>
+            <div class="modal-linkbox">
+              <div class="modal-linktext" id="modalLinkText">—</div>
+              <button class="modal-linkbtn" id="modalCopyLinkBtn" type="button">Copy</button>
+            </div>
+          </div>
+        </div>
 
         <button class="modal-close" id="modalCloseBtn" type="button" aria-label="Close">
           <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -1241,8 +1245,6 @@
             referrerpolicy="no-referrer"
           />
         </div>
-  
-
 
         <button class="nav-btn" id="modalNextBtn" type="button" aria-label="Next photo">
           <svg viewBox="0 0 24 24" aria-hidden="true">
