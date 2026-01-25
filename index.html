@@ -1783,50 +1783,65 @@ function bestImageUrlForPath(filePath) {
     // Modal / gallery logic
     // ----------------------------
     function openFolderModal(folderIndex) {
-      const folders = HISTORY.folderItems || [];
-      const f = folders[folderIndex];
-      if (!f) return;
+  const folders = HISTORY.folderItems || [];
+  const f = folders[folderIndex];
+  if (!f) return;
 
-      HISTORY.activeFolderIndex = folderIndex;
-      HISTORY.activeImageIndex = 0;
+  HISTORY.activeFolderIndex = folderIndex;
+  HISTORY.activeImageIndex = 0;
 
-      const { title, subtitle } = splitFolderName(f.name);
-      $("modalTitle").textContent = title || f.name;
-      $("modalSubtitle").textContent = subtitle || "";
+  const { title, subtitle } = splitFolderName(f.name);
+  $("modalTitle").textContent = title || f.name;
+  $("modalSubtitle").textContent = subtitle || "";
 
-      // If empty, show a friendly message in modal
-      if (!f.images || f.images.length === 0) {
-        $("modalMainImg").src = "";
-        $("modalMainImg").alt = "No photos available";
-        $("modalMainImg").style.display = "none";
-        $("modalCounter").textContent = "No photos in this folder.";
-        $("modalOpenRawLink").href = f.html_url || historyRepoUrl;
-        $("modalOpenRawLink").textContent = "Open folder";
-        $("modalThumbStrip").innerHTML = "";
-        $("historyModal").classList.add("open");
-        document.body.style.overflow = "hidden";
-        return;
-      }
+  const frame = $("modalFrame");
+  const strip = $("modalThumbStrip");
 
-      $("modalMainImg").style.display = "block";
-      $("modalOpenRawLink").textContent = "Open image";
-      $("modalPrevBtn").style.display = "inline-flex";
-      $("modalNextBtn").style.display = "inline-flex";
-      
-      updateNavButtons();
-      buildThumbStrip();
-      showActiveImage();
+  // Always clear viewer + thumbs first
+  if (frame) frame.removeAttribute("src");
+  if (strip) strip.innerHTML = "";
 
-      $("historyModal").classList.add("open");
-      document.body.style.overflow = "hidden";
-    }
+  // If empty, show friendly message
+  if (!f.images || f.images.length === 0) {
+    $("modalCounter").textContent = "No photos in this folder.";
+    $("modalOpenRawLink").href = f.html_url || historyRepoUrl;
+    $("modalOpenRawLink").textContent = "Open folder";
+
+    // Hide/disable nav arrows
+    $("modalPrevBtn").disabled = true;
+    $("modalNextBtn").disabled = true;
+    $("modalPrevBtn").style.display = "none";
+    $("modalNextBtn").style.display = "none";
+
+    $("historyModal").classList.add("open");
+    document.body.style.overflow = "hidden";
+    return;
+  }
+
+  // Show/enable nav arrows
+  $("modalPrevBtn").style.display = "inline-flex";
+  $("modalNextBtn").style.display = "inline-flex";
+  updateNavButtons();
+
+  $("modalOpenRawLink").textContent = "Open image";
+
+  buildThumbStrip();
+  showActiveImage();
+
+  $("historyModal").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
 
     function closeFolderModal() {
-      $("historyModal").classList.remove("open");
-      document.body.style.overflow = "";
-      HISTORY.activeFolderIndex = -1;
-      HISTORY.activeImageIndex = 0;
-    }
+  $("historyModal").classList.remove("open");
+  document.body.style.overflow = "";
+  HISTORY.activeFolderIndex = -1;
+  HISTORY.activeImageIndex = 0;
+
+  const frame = $("modalFrame");
+  if (frame) frame.removeAttribute("src");
+}
+
 
     function buildThumbStrip() {
       const strip = $("modalThumbStrip");
