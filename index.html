@@ -791,13 +791,6 @@
       background: #fff;
       border-top: 1px solid rgba(0, 0, 0, 0.08);
     }
-    .modal-frame{
-  width: 100%;
-  height: 100%;
-  border: 0;
-  display: block;
-  background: transparent;
-}
 
     .thumb-strip {
       display: flex;
@@ -1174,14 +1167,15 @@
         </button>
 
         <div class="modal-mainimg-wrap">
-          <iframe
-            class="modal-frame"
-            id="modalFrame"
-            title="Photo viewer"
+          <img
+            class="modal-mainimg"
+            id="modalMainImg"
+            alt="Photo"
             loading="eager"
             referrerpolicy="no-referrer"
-          ></iframe>
-        </div>   
+          />
+        </div>
+  
 
 
         <button class="nav-btn" id="modalNextBtn" type="button" aria-label="Next photo">
@@ -1794,20 +1788,22 @@ function bestImageUrlForPath(filePath) {
   $("modalTitle").textContent = title || f.name;
   $("modalSubtitle").textContent = subtitle || "";
 
-  const frame = $("modalFrame");
-  const strip = $("modalThumbStrip");
+  // Clear viewer + thumbs
+  const mainImg = $("modalMainImg");
+  if (mainImg) {
+    mainImg.removeAttribute("src");
+    mainImg.style.display = "block";
+  }
+  $("modalThumbStrip").innerHTML = "";
 
-  // Always clear viewer + thumbs first
-  if (frame) frame.removeAttribute("src");
-  if (strip) strip.innerHTML = "";
-
-  // If empty, show friendly message
+  // Empty folder
   if (!f.images || f.images.length === 0) {
+    if (mainImg) mainImg.style.display = "none";
+
     $("modalCounter").textContent = "No photos in this folder.";
     $("modalOpenRawLink").href = f.html_url || historyRepoUrl;
     $("modalOpenRawLink").textContent = "Open folder";
 
-    // Hide/disable nav arrows
     $("modalPrevBtn").disabled = true;
     $("modalNextBtn").disabled = true;
     $("modalPrevBtn").style.display = "none";
@@ -1818,7 +1814,6 @@ function bestImageUrlForPath(filePath) {
     return;
   }
 
-  // Show/enable nav arrows
   $("modalPrevBtn").style.display = "inline-flex";
   $("modalNextBtn").style.display = "inline-flex";
   updateNavButtons();
@@ -1832,14 +1827,15 @@ function bestImageUrlForPath(filePath) {
   document.body.style.overflow = "hidden";
 }
 
+
     function closeFolderModal() {
   $("historyModal").classList.remove("open");
   document.body.style.overflow = "";
   HISTORY.activeFolderIndex = -1;
   HISTORY.activeImageIndex = 0;
 
-  const frame = $("modalFrame");
-  if (frame) frame.removeAttribute("src");
+  const mainImg = $("modalMainImg");
+  if (mainImg) mainImg.removeAttribute("src");
 }
 
 
@@ -1896,7 +1892,6 @@ function bestImageUrlForPath(filePath) {
 
   const imgObj = f.images[idx];
 
-  // Update counter + link
   $("modalCounter").textContent = `${idx + 1} / ${f.images.length}`;
   $("modalOpenRawLink").href = imgObj.url || (imgObj.html_url || f.html_url || historyRepoUrl);
   $("modalOpenRawLink").textContent = "Open image";
@@ -1911,58 +1906,46 @@ function bestImageUrlForPath(filePath) {
     if (activeThumb) activeThumb.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "smooth" });
   }
 
-  // Always show arrows; disable if only one image
+  // Arrows enabled only if 2+ images (you still wrap around in next/prev)
   const hasMany = f.images.length > 1;
   $("modalPrevBtn").disabled = !hasMany;
   $("modalNextBtn").disabled = !hasMany;
 
-  // --- Load the URL into the iframe ---
-  const frame = $("modalFrame");
-  if (!frame) return;
+  // Load main image with fallback
+  const mainImg = $("modalMainImg");
+  if (!mainImg) return;
 
-  // Clear first to force reload
-  frame.removeAttribute("src");
-
-  // Use a stable cache-buster so you don't thrash caching but you also avoid stale failures
-  const bust = imgObj.sha ? imgObj.sha : "1";
+  // Build candidates (primary + CDN + raw) with a stable cache buster
+  const bust = imgObj.sha ? imgObj.sha : String(Date.now());
   const primary = imgObj.url || "";
-  const fallback = imgObj.cdn_fallback_url || imgObj.raw_fallback_url || "";
+  const cdn = imgObj.cdn_fallback_url || "";
+  const raw = imgObj.path ? rawUrlForPath(imgObj.path) : "";
 
-  // Candidate URLs
   const candidates = [];
   if (primary) candidates.push(primary);
-  if (fallback && fallback !== primary) candidates.push(fallback);
+  if (cdn && cdn !== primary) candidates.push(cdn);
+  if (raw && raw !== primary && raw !== cdn) candidates.push(raw);
+
+  // add cache-busted versions (last resort)
   if (primary) candidates.push(primary + (primary.includes("?") ? "&" : "?") + "v=" + encodeURIComponent(bust));
-  if (fallback && fallback !== primary) candidates.push(fallback + (fallback.includes("?") ? "&" : "?") + "v=" + encodeURIComponent(bust));
+  if (cdn && cdn !== primary) candidates.push(cdn + (cdn.includes("?") ? "&" : "?") + "v=" + encodeURIComponent(bust));
+  if (raw && raw !== primary && raw !== cdn) candidates.push(raw + (raw.includes("?") ? "&" : "?") + "v=" + encodeURIComponent(bust));
 
   let attempt = 0;
 
-  const tryNext = () => {
+  const tryLoad = () => {
     if (attempt >= candidates.length) {
-      // Give up gracefully
-      frame.removeAttribute("src");
+      // graceful failure: at least give them a clickable link
+      mainImg.removeAttribute("src");
       $("modalOpenRawLink").href = imgObj.html_url || f.html_url || historyRepoUrl;
       $("modalOpenRawLink").textContent = "Open folder";
       return;
     }
-    frame.src = candidates[attempt++];
+    mainImg.src = candidates[attempt++];
   };
 
-  // Iframe doesn't give reliable "image load error" events across browsers for image documents.
-  // So we do a lightweight HEAD check before setting src (more reliable).
-  const urlToCheck = candidates[attempt];
-  fetch(urlToCheck, { method: "HEAD", cache: "no-store" })
-    .then((r) => {
-      if (r.ok) tryNext();
-      else {
-        attempt++;
-        tryNext();
-      }
-    })
-    .catch(() => {
-      attempt++;
-      tryNext();
-    });
+  mainImg.onerror = () => tryLoad();
+  tryLoad();
 }
     function nextImage() {
       const f = HISTORY.folderItems[HISTORY.activeFolderIndex];
